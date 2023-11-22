@@ -18,14 +18,6 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 
-		/*Gson gson = new Gson();
-		GamingField gamingField = new GamingField();
-		String json = gson.toJson(gamingField);
-		try {
-			FileHelper.writeJsonFile("assets/test.json", json);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}*/
 
 		try {
 			String output = FileHelper.readJsonFile("assets/test.json");
