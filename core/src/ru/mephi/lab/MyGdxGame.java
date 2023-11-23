@@ -18,6 +18,8 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		GameSession session = new GameSession("1234");
 
+		// invokes in show() life cycle method
+		session.startGame();
 	}
 
 	@Override

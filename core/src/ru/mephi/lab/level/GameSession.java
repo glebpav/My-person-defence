@@ -2,26 +2,31 @@ package ru.mephi.lab.level;
 
 import ru.mephi.lab.utils.idHelper.GameIdProcessor;
 
+import static ru.mephi.lab.GameSettings.DEBUG_MODE;
+
 public class GameSession {
 
-    public GameState state;
-    public int countOfMoney;
+    private GameState state;
+    private GameParams params;
+
     private final String gameId;
     private final String gamePath;
 
     public GameSession(String gameId) {
         this.gameId = gameId;
         this.gamePath = GameIdProcessor.getGamePath(gameId);
-        System.out.println("Game path is: " + gamePath);
+        if (DEBUG_MODE) System.out.println("Game path is: " + gamePath);
+        if (gamePath.isEmpty()) state = GameState.LOADING_ERROR;
     }
 
     public void startGame() {
+        loadGame();
         state = GameState.ACTIVE;
-        countOfMoney = 0;
     }
 
-    private void load() {
-
+    private void loadGame() {
+        // load params
+        // load field
     }
 
 

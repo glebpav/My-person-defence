@@ -3,5 +3,6 @@ package ru.mephi.lab.level;
 public enum GameState {
     ACTIVE,
     PAUSED,
-    ENDED
+    ENDED,
+    LOADING_ERROR
 }
