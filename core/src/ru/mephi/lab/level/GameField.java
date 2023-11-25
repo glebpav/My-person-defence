@@ -6,10 +6,10 @@ import ru.mephi.lab.cell.Cell;
 import ru.mephi.lab.utils.vector.MyVector;
 
 
-public class GamingField {
+public class GameField {
 
 
-    public GamingField() {
+    public GameField() {
 
     }
 
@@ -26,7 +26,7 @@ public class GamingField {
     }
 
     public Actor getCeilActor(int positionX, int positionY) {
-        // TODO implement here
+
         return null;
     }
 

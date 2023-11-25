@@ -9,9 +9,6 @@ import java.util.*;
  */
 public class Cell {
 
-    /**
-     * Default constructor
-     */
     public Cell() {
     }
 
@@ -21,10 +18,7 @@ public class Cell {
     public Actor actor;
 
 
-    /**
-     * @param actor
-     */
     public void setActor(Actor actor) {
-        // TODO implement here
+        this.actor = actor;
     }
 }

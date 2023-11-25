@@ -1,5 +1,6 @@
 package ru.mephi.lab.level;
 
+import ru.mephi.lab.utils.files.JsonProcessor;
 import ru.mephi.lab.utils.idHelper.GameIdProcessor;
 
 import static ru.mephi.lab.GameSettings.DEBUG_MODE;
@@ -7,6 +8,7 @@ import static ru.mephi.lab.GameSettings.DEBUG_MODE;
 public class GameSession {
 
     private GameState state;
+    private GameField field;
     private GameParams params;
 
     private final String gameId;
@@ -25,9 +27,23 @@ public class GameSession {
     }
 
     private void loadGame() {
-        // load params
-        // load field
+
+        String rootDir = "assets/systemFiles/" + gamePath + "/";
+
+        field = JsonProcessor.getDeserializedObject(rootDir + "field.json", GameField.class);
+        params = JsonProcessor.getDeserializedObject(rootDir + "params.json", GameParams.class);
+
+        if (field == null || params == null) {
+            state = GameState.LOADING_ERROR;
+            return;
+        }
+
+        field.getCeilActor(1, 1);
+
+
     }
+
+
 
 
 }

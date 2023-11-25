@@ -7,8 +7,6 @@ import java.io.IOException;
 
 public class GameIdProcessor {
 
-
-
     private final static String tokenDescriptorPath = "assets/systemFiles/tokenDescriptor.json";
 
     public static String getGamePath(String gameId) {

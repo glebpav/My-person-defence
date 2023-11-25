@@ -1,11 +1,10 @@
 package ru.mephi.lab.utils.vector;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.Consumer;
 
-public class MyVector<T> implements Iterable<T>{
+// public class MyVector<T> implements Iterable<T>, List<T> {
+public class MyVector<T> implements Iterable<T> {
 
     private static final int INITIAL_CAPACITY = 10;
     private T[] dataVector;
@@ -25,6 +24,13 @@ public class MyVector<T> implements Iterable<T>{
             increaseCapacity();
         }
         dataVector[size++] = element;
+    }
+
+    public void set(int index, T object) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
+        }
+        dataVector[index] = object;
     }
 
     public T get(int index) {
