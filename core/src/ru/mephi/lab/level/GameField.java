@@ -30,13 +30,4 @@ public class GameField {
         return null;
     }
 
-    public void load(String path) {
-        // Gson gson = new Gson();
-        // gson.fromJson(json)
-    }
-
-    public void save(String path) {
-
-    }
-
 }

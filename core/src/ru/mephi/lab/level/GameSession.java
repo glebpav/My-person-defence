@@ -38,7 +38,7 @@ public class GameSession {
             return;
         }
 
-        field.getCeilActor(1, 1);
+        System.out.println(field.getCeilActor(1, 1));
 
 
     }

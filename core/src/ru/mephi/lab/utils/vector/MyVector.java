@@ -4,13 +4,13 @@ import java.util.*;
 import java.util.function.Consumer;
 
 // public class MyVector<T> implements Iterable<T>, List<T> {
-public class MyVector<T> implements Iterable<T> {
+public class MyVector<T> implements Iterable<T>, List<T> {
 
     private static final int INITIAL_CAPACITY = 10;
     private T[] dataVector;
     private int size = 0;
 
-    public int getSize(){
+    public int getSize() {
         return size;
     }
 
@@ -19,18 +19,106 @@ public class MyVector<T> implements Iterable<T> {
         dataVector = (T[]) new Object[INITIAL_CAPACITY];
     }
 
-    public void add(T element) {
+    public boolean add(T element) {
         if (size == dataVector.length) {
             increaseCapacity();
         }
         dataVector[size++] = element;
+        return true;
     }
 
-    public void set(int index, T object) {
+    @Override
+    public boolean remove(Object o) {
+        for (int i = 0; i < dataVector.length; i++) {
+            if (dataVector[i] == o) {
+                remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        for (Object o : c) {
+            if (!contains(o)) return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        for (T o : c) add(o);
+        return true;
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends T> c) {
+        addAll(c);
+        for (int i = size - 1; i >= index; i--) {
+            dataVector[i] = dataVector[i - c.size()];
+        }
+        for (int i = index; i < index + c.size(); i++) {
+            dataVector[i] = (T) c.toArray()[i];
+        }
+        return true;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        boolean wasChanged = false;
+        for (Object object : c) {
+            wasChanged = wasChanged || remove(object);
+        }
+        return wasChanged;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        MyVector<Object> bufVector = new <Object>MyVector();
+        for (Object object : c) {
+            if (contains(object)) {
+                bufVector.add(object);
+            }
+        }
+
+        if (bufVector.size != size) {
+            clear();
+            addAll((Collection<? extends T>) bufVector);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void clear() {
+        size = 0;
+    }
+
+    @Override
+    public T set(int index, T element) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
         }
-        dataVector[index] = object;
+        T object = dataVector[index];
+        dataVector[index] = element;
+        return object;
+    }
+
+    @Override
+    public void add(int index, T element) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
+        }
+
+        add(null);
+
+        for (int i = index + size - 1; i > index; i--) {
+            dataVector[i] = dataVector[i - 1];
+        }
+
+        dataVector[index] = element;
     }
 
     public T get(int index) {
@@ -54,6 +142,46 @@ public class MyVector<T> implements Iterable<T> {
         return removedElement;
     }
 
+    @Override
+    public int indexOf(Object o) {
+        for (int i = 0; i < size; i++) {
+            if (o == dataVector[i]) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        for (int i = size - 1; i >= 0; i--) {
+            if (o == dataVector[i]) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public ListIterator<T> listIterator() {
+        return new MyVectorIterator<>(this);
+    }
+
+    @Override
+    public ListIterator<T> listIterator(int index) {
+        return new MyVectorIterator<>(this, index);
+    }
+
+    @Override
+    public List<T> subList(int fromIndex, int toIndex) {
+        if (toIndex > size || fromIndex < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        MyVector<T> subVector = new MyVector<>();
+        for (int i = fromIndex; i < toIndex; i++) {
+            subVector.add(dataVector[i]);
+        }
+
+        return subVector;
+    }
+
     private void increaseCapacity() {
         int newIncreasedCapacity = dataVector.length * 2;
         dataVector = Arrays.copyOf(dataVector, newIncreasedCapacity);
@@ -71,8 +199,54 @@ public class MyVector<T> implements Iterable<T> {
     }
 
     @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return size <= 0;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        for (Object object : dataVector) {
+            if (o == object) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public Iterator iterator() {
         return new MyVectorIterator(this);
+    }
+
+    @Override
+    public Object[] toArray() {
+        Object[] array = new Object[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = get(i);
+        }
+
+        return array;
+    }
+
+    @Override
+    public <T1> T1[] toArray(T1[] a) {
+        if (a.length < size) {
+            T1[] array = (T1[]) new Object[size];
+            for (int i = 0; i < size; i++) {
+                array[i] = (T1) get(i);
+            }
+            return array;
+        } else {
+            for (int i = 0; i < size; i++) {
+                a[i] = (T1) get(i);
+            }
+            return a;
+        }
     }
 
 }
