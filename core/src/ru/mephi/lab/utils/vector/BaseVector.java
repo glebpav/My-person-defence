@@ -1,10 +1,9 @@
 package ru.mephi.lab.utils.vector;
 
 import java.util.*;
-import java.util.function.Consumer;
 
 // public class MyVector<T> implements Iterable<T>, List<T> {
-public class MyVector<T> implements Iterable<T>, List<T> {
+public class BaseVector<T> implements Iterable<T>, List<T> {
 
     private static final int INITIAL_CAPACITY = 10;
     private T[] dataVector;
@@ -14,7 +13,7 @@ public class MyVector<T> implements Iterable<T>, List<T> {
         return size;
     }
 
-    public MyVector() {
+    public BaseVector() {
         // Effective Java; Item 26
         dataVector = (T[]) new Object[INITIAL_CAPACITY];
     }
@@ -75,7 +74,7 @@ public class MyVector<T> implements Iterable<T>, List<T> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        MyVector<Object> bufVector = new <Object>MyVector();
+        BaseVector<Object> bufVector = new <Object>BaseVector();
         for (Object object : c) {
             if (contains(object)) {
                 bufVector.add(object);
@@ -160,12 +159,12 @@ public class MyVector<T> implements Iterable<T>, List<T> {
 
     @Override
     public ListIterator<T> listIterator() {
-        return new MyVectorIterator<>(this);
+        return new BaseVectorIterator<>(this);
     }
 
     @Override
     public ListIterator<T> listIterator(int index) {
-        return new MyVectorIterator<>(this, index);
+        return new BaseVectorIterator<>(this, index);
     }
 
     @Override
@@ -174,7 +173,7 @@ public class MyVector<T> implements Iterable<T>, List<T> {
             throw new IndexOutOfBoundsException();
         }
 
-        MyVector<T> subVector = new MyVector<>();
+        BaseVector<T> subVector = new BaseVector<>();
         for (int i = fromIndex; i < toIndex; i++) {
             subVector.add(dataVector[i]);
         }
@@ -220,7 +219,7 @@ public class MyVector<T> implements Iterable<T>, List<T> {
 
     @Override
     public Iterator iterator() {
-        return new MyVectorIterator(this);
+        return new BaseVectorIterator(this);
     }
 
     @Override

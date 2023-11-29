@@ -1,18 +1,16 @@
 package ru.mephi.lab.utils.vector;
 
-import java.util.Iterator;
 import java.util.ListIterator;
-import java.util.function.Consumer;
 
-public class MyVectorIterator<T> implements ListIterator<T> {
+public class BaseVectorIterator<T> implements ListIterator<T> {
     int cursor;
-    MyVector <T>vector;
+    BaseVector<T> vector;
 
-    MyVectorIterator(MyVector<T> vector) {
+    BaseVectorIterator(BaseVector<T> vector) {
         this.vector = vector;
     }
 
-    MyVectorIterator(MyVector<T> vector, int index) {
+    BaseVectorIterator(BaseVector<T> vector, int index) {
         this(vector);
         cursor = index;
     }

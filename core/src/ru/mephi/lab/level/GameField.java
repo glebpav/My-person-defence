@@ -3,7 +3,7 @@ package ru.mephi.lab.level;
 import com.google.gson.annotations.SerializedName;
 import ru.mephi.lab.actor.Actor;
 import ru.mephi.lab.cell.Cell;
-import ru.mephi.lab.utils.vector.MyVector;
+import ru.mephi.lab.utils.vector.BaseVector;
 
 
 public class GameField {
@@ -14,7 +14,7 @@ public class GameField {
     }
 
     @SerializedName("fieldCells")
-    public MyVector <MyVector<Cell>> field;
+    public BaseVector<BaseVector<Cell>> field;
 
     @SerializedName("width")
     public int fieldWidth;

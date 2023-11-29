@@ -4,17 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import ru.mephi.lab.actor.constructions.Castle;
-import ru.mephi.lab.cell.Cell;
-import ru.mephi.lab.cell.PlainCell;
-import ru.mephi.lab.level.GameField;
-import ru.mephi.lab.level.GameParams;
 import ru.mephi.lab.level.GameSession;
-import ru.mephi.lab.utils.files.FileHelper;
-import ru.mephi.lab.utils.files.JsonProcessor;
-import ru.mephi.lab.utils.vector.MyVector;
-
-import java.io.IOException;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
