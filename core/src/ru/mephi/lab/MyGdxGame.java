@@ -12,16 +12,18 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import ru.mephi.lab.level.GameSession;
 import ru.mephi.lab.screens.GameScreen;
 import ru.mephi.lab.screens.MenuScreen;
+import ru.mephi.lab.utils.idHelper.GameIdProcessor;
+import ru.mephi.lab.utils.idHelper.IdHandler;
 
 import static ru.mephi.lab.GameSettings.*;
 
 public class MyGdxGame extends Game {
 
+	public GameIdProcessor gameIdProcessor;
+
 	public Skin skin;
 	OrthographicCamera camera;
 	public ExtendViewport viewport;
-
-	SpriteBatch batch;
 
 	GameScreen gameScreen;
 	MenuScreen menuScreen;
@@ -35,15 +37,18 @@ public class MyGdxGame extends Game {
 		skin = new Skin(Gdx.files.internal(SKINS_PATH + "default/skin/uiskin.json"));
 		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
 
+		gameIdProcessor = new GameIdProcessor();
+		gameIdProcessor.loadSavedGames();
+
 		gameScreen = new GameScreen(this);
 		menuScreen = new MenuScreen(this);
 
 		setScreen(menuScreen);
 
 	}
-	
+
 	@Override
-	public void dispose () {
-		batch.dispose();
+	public void dispose() {
+		skin.dispose();
 	}
 }

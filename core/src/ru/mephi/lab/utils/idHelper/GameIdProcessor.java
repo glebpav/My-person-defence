@@ -8,6 +8,18 @@ import java.io.IOException;
 public class GameIdProcessor {
 
     private final static String tokenDescriptorPath = "assets/systemFiles/tokenDescriptor.json";
+    public IdHandler idHandler;
+
+    public IdHandler loadSavedGames() {
+        try {
+            String json = FileHelper.readJsonFile(tokenDescriptorPath);
+            Gson gson = new Gson();
+            idHandler = gson.fromJson(json, IdHandler.class);
+            return idHandler;
+        } catch (IOException ignored) {
+            return null;
+        }
+    }
 
     public static String getGamePath(String gameId) {
         try {
@@ -17,7 +29,6 @@ public class GameIdProcessor {
             return idHandler.getGamePathById(gameId);
         } catch (IOException e) {
             return "";
-            // throw new RuntimeException(e);
         }
     }
 

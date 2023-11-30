@@ -21,4 +21,10 @@ public class IdHandler {
         }
         return "";
     }
+
+    public String[] getGamesArray() {
+        String[] gamesArray = new String[idInfosArray.size()];
+        for (int i = 0; i < idInfosArray.size(); i++) gamesArray[i] = idInfosArray.get(i).getId();
+        return gamesArray;
+    }
 }
