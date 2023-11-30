@@ -21,6 +21,7 @@ public class JsonProcessor {
     public static <T> boolean serializeObjectAndWrite(String path, T object) {
         Gson gson = new Gson();
         try {
+            // gson.toJson
             FileHelper.writeJsonFile(path, gson.toJson(object));
             return true;
         } catch (IOException e) {

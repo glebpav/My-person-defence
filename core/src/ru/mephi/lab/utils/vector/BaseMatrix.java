@@ -1,15 +1,18 @@
 package ru.mephi.lab.utils.vector;
 
-import ru.mephi.lab.actor.Actor;
+import com.google.gson.annotations.SerializedName;
 
 public class BaseMatrix<T> {
 
+    @SerializedName("width")
     int width;
+    @SerializedName("height")
     int height;
 
-    BaseVector<BaseVector<T>> matrix;
+    @SerializedName("matrix")
+    public BaseVector<BaseVector<T>> matrix;
 
-    BaseMatrix(int width, int height) {
+    public BaseMatrix(int width, int height) {
         this.width = width;
         this.height = height;
 
@@ -23,11 +26,11 @@ public class BaseMatrix<T> {
         }
     }
 
-    T getCell(int x, int y) {
+    public T getCell(int x, int y) {
         return matrix.get(y).get(y);
     }
 
-    void setCell(int x, int y, T value) {
+    public void setCell(int x, int y, T value) {
         matrix.get(y).set(x, value);
     }
 

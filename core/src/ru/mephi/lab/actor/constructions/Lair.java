@@ -1,6 +1,6 @@
 package ru.mephi.lab.actor.constructions;
 
-import ru.mephi.lab.actor.Actor;
+import ru.mephi.lab.actor.BaseActor;
 import ru.mephi.lab.utils.lair.EnemyArray;
 
 import java.util.*;
@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * 
  */
-public class Lair extends Actor {
+public class Lair extends BaseActor {
 
     /**
      * Default constructor

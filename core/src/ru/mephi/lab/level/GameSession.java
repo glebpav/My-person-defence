@@ -8,7 +8,7 @@ import static ru.mephi.lab.GameSettings.DEBUG_MODE;
 public class GameSession {
 
     private GameState state;
-    private GameField field;
+    public GameField field;
     private GameParams params;
 
     private final String gameId;

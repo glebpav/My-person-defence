@@ -1,6 +1,6 @@
 package ru.mephi.lab.actor.enemy;
 
-import ru.mephi.lab.actor.Actor;
+import ru.mephi.lab.actor.BaseActor;
 import ru.mephi.lab.actor.abilities.Damageable;
 import ru.mephi.lab.actor.abilities.Hittable;
 
@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * 
  */
-public class Enemy extends Actor implements Damageable, Hittable {
+public class Enemy extends BaseActor implements Damageable, Hittable {
 
     /**
      * Default constructor

@@ -1,12 +1,17 @@
 package ru.mephi.lab.utils.vector;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.*;
 
 // public class MyVector<T> implements Iterable<T>, List<T> {
 public class BaseVector<T> implements Iterable<T>, List<T> {
 
     private static final int INITIAL_CAPACITY = 10;
+    @SerializedName("dataVector")
     private T[] dataVector;
+
+    @SerializedName("size")
     private int size = 0;
 
     public int getSize() {
@@ -247,5 +252,4 @@ public class BaseVector<T> implements Iterable<T>, List<T> {
             return a;
         }
     }
-
 }

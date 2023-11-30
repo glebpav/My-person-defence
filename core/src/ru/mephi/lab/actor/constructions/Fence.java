@@ -1,14 +1,12 @@
 package ru.mephi.lab.actor.constructions;
 
-import ru.mephi.lab.actor.Actor;
+import ru.mephi.lab.actor.BaseActor;
 import ru.mephi.lab.actor.abilities.Hittable;
-
-import java.util.*;
 
 /**
  * 
  */
-public class Fence extends Actor implements Hittable {
+public class Fence extends BaseActor implements Hittable {
 
     /**
      * Default constructor

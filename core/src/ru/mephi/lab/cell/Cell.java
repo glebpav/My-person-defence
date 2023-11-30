@@ -1,24 +1,32 @@
 package ru.mephi.lab.cell;
 
-import ru.mephi.lab.actor.Actor;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import ru.mephi.lab.actor.BaseActor;
 
-import java.util.*;
+import static ru.mephi.lab.GameSettings.CELL_HEIGHT;
+import static ru.mephi.lab.GameSettings.CELL_WIDTH;
 
-/**
- * 
- */
-public class Cell {
 
-    public Cell() {
+public class Cell extends Actor {
+
+    Texture texture;
+    String texturePath;
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 
-    /**
-     * 
-     */
-    public Actor actor;
+    public Cell(int x, int y) {
+        setWidth(CELL_WIDTH);
+        setHeight(CELL_HEIGHT);
+    }
 
+    public BaseActor baseActor;
 
-    public void setActor(Actor actor) {
-        this.actor = actor;
+    public void setActor(BaseActor baseActor) {
+        this.baseActor = baseActor;
     }
 }

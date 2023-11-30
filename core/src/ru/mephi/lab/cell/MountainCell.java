@@ -1,12 +1,20 @@
 package ru.mephi.lab.cell;
 
-import ru.mephi.lab.actor.Actor;
+import com.badlogic.gdx.graphics.Texture;
+import ru.mephi.lab.actor.BaseActor;
+
+import static ru.mephi.lab.GameSettings.TILES_PATH;
 
 public class MountainCell extends Cell{
 
-    // TODO: implement this
+    public MountainCell(int x, int y) {
+        super(x, y);
+        texturePath = TILES_PATH + "grass1.png";
+        texture = new Texture(texturePath);
+    }
+
     @Override
-    public void setActor(Actor actor) {
-        super.setActor(actor);
+    public void setActor(BaseActor baseActor) {
+        super.setActor(baseActor);
     }
 }

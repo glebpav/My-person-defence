@@ -1,15 +1,13 @@
 package ru.mephi.lab.actor.constructions;
 
-import ru.mephi.lab.actor.Actor;
+import ru.mephi.lab.actor.BaseActor;
 import ru.mephi.lab.actor.abilities.Hittable;
 import ru.mephi.lab.actor.abilities.Updatable;
-
-import java.util.*;
 
 /**
  * 
  */
-public class Castle extends Actor implements Hittable, Updatable {
+public class Castle extends BaseActor implements Hittable, Updatable {
 
     /**
      * Default constructor
