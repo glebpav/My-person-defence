@@ -7,7 +7,7 @@ import ru.mephi.lab.actor.abilities.Indescribable;
 
 public class BaseActor extends com.badlogic.gdx.scenes.scene2d.Actor implements Indescribable {
 
-    Texture texture;
+    transient Texture texture;
     String texturePath;
 
     public BaseActor() {

@@ -13,9 +13,12 @@ public class JsonProcessor {
             Gson gson = new Gson();
             return gson.fromJson(objectString, objectType);
         } catch (IOException e) {
+            System.out.println("io exception");
             // throw new RuntimeException(e);
             return null;
         }
+        // assets/systemFiles/gameAFG2Bae323vr/params.json
+        // assets/systemFiles/gameSaves/gameAFG2Bae323vr/field.json
     }
 
     public static <T> boolean serializeObjectAndWrite(String path, T object) {

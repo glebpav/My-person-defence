@@ -27,7 +27,7 @@ public class BaseMatrix<T> {
     }
 
     public T getCell(int x, int y) {
-        return matrix.get(y).get(y);
+        return matrix.get(x).get(y);
     }
 
     public void setCell(int x, int y, T value) {

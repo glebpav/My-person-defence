@@ -28,7 +28,7 @@ public class GameSession {
 
     private void loadGame() {
 
-        String rootDir = "assets/systemFiles/" + gamePath + "/";
+        String rootDir = "assets/systemFiles/gameSaves/" + gamePath + "/";
 
         field = JsonProcessor.getDeserializedObject(rootDir + "field.json", GameField.class);
         params = JsonProcessor.getDeserializedObject(rootDir + "params.json", GameParams.class);
@@ -38,8 +38,7 @@ public class GameSession {
             return;
         }
 
-        System.out.println(field.getCeilActor(1, 1));
-
+        System.out.println("ceil actor: " + field.getCeilActor(10, 10));
 
     }
 

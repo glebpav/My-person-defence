@@ -44,6 +44,7 @@ public class GameField {
 
         for (int i = 0; i < fieldHeight; i++) {
             for (int j = 0; j < fieldHeight; j++) {
+                field.getCell(i, j).loadTexture();
                 actorsList.add(field.getCell(i, j));
             }
         }

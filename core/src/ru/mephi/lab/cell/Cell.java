@@ -11,7 +11,7 @@ import static ru.mephi.lab.GameSettings.CELL_WIDTH;
 
 public class Cell extends Actor {
 
-    Texture texture;
+    public transient Texture texture;
     String texturePath;
 
     @Override
@@ -20,6 +20,14 @@ public class Cell extends Actor {
     }
 
     public Cell(int x, int y) {
+        setBounds(x, y, CELL_WIDTH, CELL_HEIGHT);
+    }
+
+    public void loadTexture() {
+        if (!texturePath.isEmpty()) {
+            texture = new Texture(texturePath);
+        }
+
         setWidth(CELL_WIDTH);
         setHeight(CELL_HEIGHT);
     }

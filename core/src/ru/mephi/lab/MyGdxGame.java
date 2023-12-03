@@ -36,18 +36,17 @@ public class MyGdxGame extends Game {
 	@Override
 	public void create () {
 
-		GameField gameField = new GameField(10, 10);
+		/*GameField gameField = new GameField(10, 10);
 
 		for (int i = 0; i < 10; i++) {
-			gameField.field.matrix.add(new BaseVector<Cell>());
 			for (int j = 0; j < 10; j++) {
-				gameField.field.matrix.get(i).add(new PlainCell(j * CELL_WIDTH, i * CELL_HEIGHT));
+				gameField.field.matrix.get(i).set(j, new PlainCell(j * CELL_WIDTH, i * CELL_HEIGHT));
 			}
 		}
 
 		JsonProcessor.serializeObjectAndWrite("assets/systemFiles/gameSaves/gameAFG2Bae323vr/field.json", gameField);
-
-		/*camera = new OrthographicCamera(SCREEN_WIDTH, SCREEN_HEIGHT);
+*/
+		camera = new OrthographicCamera(SCREEN_WIDTH, SCREEN_HEIGHT);
 		viewport = new ExtendViewport(SCREEN_WIDTH, SCREEN_HEIGHT, camera);
 
 		skin = new Skin(Gdx.files.internal(SKINS_PATH + "default/skin/uiskin.json"));
@@ -59,7 +58,7 @@ public class MyGdxGame extends Game {
 		gameScreen = new GameScreen(this);
 		menuScreen = new MenuScreen(this);
 
-		setScreen(menuScreen);*/
+		setScreen(menuScreen);
 
 	}
 
