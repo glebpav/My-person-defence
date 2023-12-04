@@ -14,7 +14,7 @@ public class MountainCell extends Cell{
     }
 
     @Override
-    public void setActor(BaseActor baseActor) {
-        super.setActor(baseActor);
+    public void addActor(BaseActor baseActor) {
+        super.addActor(baseActor);
     }
 }

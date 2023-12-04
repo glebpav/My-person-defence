@@ -9,17 +9,11 @@ import java.util.*;
  */
 public class EnemyArray {
 
-    public EnemyArray() {
-    }
-
-    /**
-     * 
-     */
-    public int appiranceTime;
-
-    /**
-     * 
-     */
+    public int appearanceTime;
     public ArrayList<Enemy> enemies;
+    public EnemyArray(int appearanceTime, ArrayList<Enemy> enemies) {
+        this.appearanceTime = appearanceTime;
+        this.enemies = enemies;
+    }
 
 }

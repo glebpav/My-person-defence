@@ -2,14 +2,17 @@ package ru.mephi.lab.actor;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.mephi.lab.actor.abilities.Indescribable;
 
 import java.util.ArrayList;
 
 
-public class BaseActor extends com.badlogic.gdx.scenes.scene2d.Actor implements Indescribable {
+public class BaseActor extends Actor implements Indescribable {
 
     protected DrawingType drawingType;
+
+    public ActorType actorType;
 
     protected transient Texture texture;
     protected transient ArrayList<Texture> texturesArray;

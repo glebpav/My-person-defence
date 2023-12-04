@@ -15,7 +15,7 @@ public class PlainCell extends Cell{
 
     // TODO: implement this
     @Override
-    public void setActor(BaseActor baseActor) {
-        super.setActor(baseActor);
+    public void addActor(BaseActor baseActor) {
+        super.addActor(baseActor);
     }
 }

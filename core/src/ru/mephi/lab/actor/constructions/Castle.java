@@ -21,7 +21,7 @@ public class Castle extends BaseActor implements Hittable, Updatable {
     public double speedOfRegeneration;
 
     public Castle(int level, float x, float y) {
-        super(x, y);
+        super(x + (CELL_WIDTH - CASTLE_WIDTH) / 2f, y + (0.75f * CELL_HEIGHT - 0.5f * CASTLE_HEIGHT + Castle.Y_OFFSET));
 
         setWidth(CASTLE_WIDTH);
         setHeight(CASTLE_HEIGHT);

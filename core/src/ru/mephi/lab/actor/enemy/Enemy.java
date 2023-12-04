@@ -7,31 +7,21 @@ import ru.mephi.lab.actor.abilities.Hittable;
 import java.util.*;
 
 /**
- * 
+ *
  */
 public class Enemy extends BaseActor implements Damageable, Hittable {
 
-    /**
-     * Default constructor
-     */
+    public ArrayList<HeroBuff> buffsArray;
+
     public Enemy(float x, float y) {
         super(x, y);
     }
 
-    /**
-     * 
-     */
-    public ArrayList<HeroBuff> buffsArray;
-
-    /**
-     * @param buff
-     */
     public void applyBuff(HeroBuff buff) {
         // TODO implement here
     }
 
     public void makeStep() {
-        System.out.println("base make step method");
     }
 
     @Override

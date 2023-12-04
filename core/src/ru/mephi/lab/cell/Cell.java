@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.mephi.lab.actor.BaseActor;
 
+import java.util.ArrayList;
+
 import static ru.mephi.lab.GameSettings.CELL_HEIGHT;
 import static ru.mephi.lab.GameSettings.CELL_WIDTH;
 
@@ -14,15 +16,16 @@ public class Cell extends Actor {
     public transient Texture texture;
     String texturePath;
 
-    public BaseActor baseActor;
+    public ArrayList<BaseActor> actorsList;
+
+    public Cell(int x, int y) {
+        setBounds(x, y, CELL_WIDTH, CELL_HEIGHT);
+        actorsList = new ArrayList<>();
+    }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
-    }
-
-    public Cell(int x, int y) {
-        setBounds(x, y, CELL_WIDTH, CELL_HEIGHT);
     }
 
     public void loadTexture() {
@@ -34,7 +37,12 @@ public class Cell extends Actor {
         setHeight(CELL_HEIGHT);
     }
 
-    public void setActor(BaseActor baseActor) {
-        this.baseActor = baseActor;
+    public void addActor(BaseActor baseActor) {
+        actorsList.add(baseActor);
     }
+
+    public void removeActor(BaseActor baseActor) {
+        actorsList.remove(baseActor);
+    }
+
 }

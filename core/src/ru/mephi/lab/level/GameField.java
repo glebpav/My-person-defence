@@ -17,6 +17,8 @@ public class GameField {
     @SerializedName("fieldCells")
     public BaseMatrix<Cell> field;
 
+    // public BaseMatrix<Integer>
+
     public transient int heightInPixels;
 
     @SerializedName("width")
@@ -62,8 +64,11 @@ public class GameField {
         return actorsList;
     }
 
+    @SuppressWarnings("NewApi")
     public ArrayList<Actor> getAllActors() {
         ArrayList<Actor> actorsList = new ArrayList<>();
+
+        Cell cell;
 
         for (int i = 0; i < fieldHeight; i++) {
             for (int j = 0; j < fieldHeight; j++) {
@@ -71,11 +76,14 @@ public class GameField {
                 // float x = (i - j) * (CELL_WIDTH / 2f);
                 // float y = (i + j) * (CELL_WIDTH / 4f);
 
-                field.getCell(i, j).loadTexture();
+                cell = field.getCell(i, j);
+                cell.loadTexture();
 
-                if (field.getCell(i, j).baseActor != null) {
-                    field.getCell(i, j).baseActor.loadTexture();
-                    actorsList.add(field.getCell(i, j).baseActor);
+                if (!field.getCell(i, j).actorsList.isEmpty()) {
+                    cell.actorsList.forEach(actor -> {
+                        actor.loadTexture();
+                        actorsList.add(actor);
+                    });
                 }
             }
         }

@@ -16,13 +16,13 @@ public class GameScreen extends BaseScreen {
 
     public GameScreen(MyGdxGame myGdxGame) {
         super(myGdxGame);
-
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
         handleInput();
+        gameSession.makeGameStep();
     }
 
     @Override
@@ -36,13 +36,21 @@ public class GameScreen extends BaseScreen {
     @SuppressWarnings("NewApi")
     public void loadSession(String gameId) {
         gameSession = new GameSession(gameId);
+        gameSession.setOnFieldChangedListener(onFieldChanged);
         gameSession.startGame();
-        ArrayList<Actor> cellsActors = gameSession.field.getAllCells();
-        ArrayList<Actor> actors = gameSession.field.getAllActors();
-
-        cellsActors.forEach(actor -> stage.addActor(actor));
-        actors.forEach(actor -> stage.addActor(actor));
+        gameSession.getAllActors();
     }
+
+    @SuppressWarnings("NewApi")
+    GameSession.OnFieldChanged onFieldChanged = newActors -> {
+        System.out.println("add new enemy");
+        System.out.println(newActors.size());
+        System.out.println(newActors.get(0).getX());
+        System.out.println(newActors.get(0).getY());
+
+        newActors.forEach(actor -> stage.addActor(actor));
+    };
+
 
     public void handleInput() {
 

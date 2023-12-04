@@ -4,21 +4,27 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import ru.mephi.lab.actor.Position;
 import ru.mephi.lab.actor.constructions.Castle;
 import ru.mephi.lab.actor.constructions.Lair;
+import ru.mephi.lab.actor.enemy.LightInfantry;
 import ru.mephi.lab.cell.Cell;
 import ru.mephi.lab.cell.MountainCell;
 import ru.mephi.lab.cell.PlainCell;
 import ru.mephi.lab.cell.WaterCell;
+import ru.mephi.lab.level.GameConstructions;
 import ru.mephi.lab.level.GameField;
 import ru.mephi.lab.screens.GameScreen;
 import ru.mephi.lab.screens.MenuScreen;
 import ru.mephi.lab.utils.files.JsonProcessor;
 import ru.mephi.lab.utils.geometry.GeometryHelper;
 import ru.mephi.lab.utils.idHelper.GameIdProcessor;
+import ru.mephi.lab.utils.lair.EnemyArray;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import static ru.mephi.lab.GameSettings.*;
@@ -38,9 +44,10 @@ public class MyGdxGame extends Game {
     public void create() {
 
         GameField gameField = new GameField(10, 10);
+        GameConstructions gameConstructions = new GameConstructions();
         Random rn = new Random();
 
-        int [][] matrix = {
+        int[][] matrix = {
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                 {1, 1, 1, 1, 1, 1, 1, 1, 2, 2},
@@ -73,19 +80,27 @@ public class MyGdxGame extends Game {
 
         Cell cell = gameField.field.getCell(0, 0);
 
-        float fx = cell.getX() + (CELL_WIDTH - LAIR_WIDTH) / 2f;
-        float fy = cell.getY() + (0.75f * CELL_HEIGHT - 0.5f * LAIR_HEIGHT + Lair.Y_OFFSET);
+        float fx = cell.getX();
+        float fy = cell.getY();
 
-        cell.setActor(new Lair(fx, fy));
+        EnemyArray enemyArray = new EnemyArray(2, new ArrayList<>(Arrays.asList(new LightInfantry(fx, fy))));
+
+        Lair lair = new Lair(fx, fy);
+        lair.addEnemies(enemyArray);
+        cell.addActor(lair);
+        gameConstructions.addLair(lair);
 
         cell = gameField.field.getCell(9, 9);
 
-        fx = cell.getX() + (CELL_WIDTH - CASTLE_WIDTH) / 2f;
-        fy = cell.getY() + (0.75f * CELL_HEIGHT - 0.5f * CASTLE_HEIGHT + Castle.Y_OFFSET);
+        fx = cell.getX();
+        fy = cell.getY();
 
-        cell.setActor(new Castle(0, fx, fy));
+        Castle castle = new Castle(0, fx, fy);
+        cell.addActor(castle);
+        gameConstructions.setCastle(castle);
 
         JsonProcessor.serializeObjectAndWrite("assets/systemFiles/gameSaves/gameAFG2Bae323vr/field.json", gameField);
+        JsonProcessor.serializeObjectAndWrite("assets/systemFiles/gameSaves/gameAFG2Bae323vr/constructions.json", gameConstructions);
 
 
         camera = new OrthographicCamera(SCREEN_WIDTH, SCREEN_HEIGHT);
