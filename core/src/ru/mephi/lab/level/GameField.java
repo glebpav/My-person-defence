@@ -8,12 +8,18 @@ import ru.mephi.lab.utils.vector.BaseMatrix;
 import ru.mephi.lab.utils.vector.BaseVector;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
+import static ru.mephi.lab.GameSettings.CELL_WIDTH;
 
 
 public class GameField {
 
     @SerializedName("fieldCells")
     public BaseMatrix<Cell> field;
+
+    public transient int heightInPixels;
 
     @SerializedName("width")
     public int fieldWidth;
@@ -44,10 +50,18 @@ public class GameField {
 
         for (int i = 0; i < fieldHeight; i++) {
             for (int j = 0; j < fieldHeight; j++) {
+
+                // float x = (i - j) * (CELL_WIDTH / 2f);
+                // float y = (i + j) * (CELL_WIDTH / 4f);
+
                 field.getCell(i, j).loadTexture();
                 actorsList.add(field.getCell(i, j));
             }
         }
+
+        heightInPixels = (int) ((fieldHeight) * (CELL_WIDTH / 4f));
+
+        Collections.reverse(actorsList);
 
         return actorsList;
     }

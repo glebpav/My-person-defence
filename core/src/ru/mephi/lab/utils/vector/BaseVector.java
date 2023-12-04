@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.*;
 
-// public class MyVector<T> implements Iterable<T>, List<T> {
-public class BaseVector<T> implements Iterable<T>, List<T> {
+public class BaseVector<T> implements List<T> {
 
+     @SerializedName("initialCapacity")
     private static final int INITIAL_CAPACITY = 10;
     @SerializedName("dataVector")
     private T[] dataVector;

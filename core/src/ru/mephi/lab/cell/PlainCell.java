@@ -9,7 +9,7 @@ public class PlainCell extends Cell{
 
     public PlainCell(int x, int y) {
         super(x, y);
-        texturePath = TILES_PATH + "grass3.png";
+        texturePath = TILES_PATH + "plane.png";
         texture = new Texture(texturePath);
     }
 

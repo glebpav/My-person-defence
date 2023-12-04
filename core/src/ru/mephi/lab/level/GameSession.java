@@ -14,6 +14,8 @@ public class GameSession {
     private final String gameId;
     private final String gamePath;
 
+    public int pixelHeight;
+
     public GameSession(String gameId) {
         this.gameId = gameId;
         this.gamePath = GameIdProcessor.getGamePath(gameId);
@@ -37,8 +39,6 @@ public class GameSession {
             state = GameState.LOADING_ERROR;
             return;
         }
-
-        System.out.println("ceil actor: " + field.getCeilActor(10, 10));
 
     }
 

@@ -77,6 +77,10 @@ project(":android") {
 project(":core") {
     apply plugin: "java-library"
 
+    compileJava {
+        sourceCompatibility = 15
+        targetCompatibility = 15
+    }
 
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
