@@ -5,10 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import ru.mephi.lab.actor.BaseActor;
 import ru.mephi.lab.cell.Cell;
 import ru.mephi.lab.utils.vector.BaseMatrix;
-import ru.mephi.lab.utils.vector.BaseVector;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 import static ru.mephi.lab.GameSettings.CELL_WIDTH;
@@ -45,7 +43,7 @@ public class GameField {
         return null;
     }
 
-    public ArrayList<Actor> getAllActors() {
+    public ArrayList<Actor> getAllCells() {
         ArrayList<Actor> actorsList = new ArrayList<>();
 
         for (int i = 0; i < fieldHeight; i++) {
@@ -60,9 +58,29 @@ public class GameField {
         }
 
         heightInPixels = (int) ((fieldHeight) * (CELL_WIDTH / 4f));
+        Collections.reverse(actorsList);
+        return actorsList;
+    }
+
+    public ArrayList<Actor> getAllActors() {
+        ArrayList<Actor> actorsList = new ArrayList<>();
+
+        for (int i = 0; i < fieldHeight; i++) {
+            for (int j = 0; j < fieldHeight; j++) {
+
+                // float x = (i - j) * (CELL_WIDTH / 2f);
+                // float y = (i + j) * (CELL_WIDTH / 4f);
+
+                field.getCell(i, j).loadTexture();
+
+                if (field.getCell(i, j).baseActor != null) {
+                    field.getCell(i, j).baseActor.loadTexture();
+                    actorsList.add(field.getCell(i, j).baseActor);
+                }
+            }
+        }
 
         Collections.reverse(actorsList);
-
         return actorsList;
     }
 

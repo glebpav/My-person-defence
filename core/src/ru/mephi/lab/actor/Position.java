@@ -16,11 +16,15 @@ public class Position {
     /**
      * 
      */
-    public int x;
+    public float x;
 
     /**
      * 
      */
-    public int y;
+    public float y;
 
+    public Position(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
 }

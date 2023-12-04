@@ -12,7 +12,8 @@ public class Aviation extends Enemy {
     /**
      * Default constructor
      */
-    public Aviation() {
+    public Aviation(float x, float y) {
+        super(x, y);
     }
 
     /**

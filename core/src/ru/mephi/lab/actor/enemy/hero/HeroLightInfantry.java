@@ -15,7 +15,8 @@ public class HeroLightInfantry extends LightInfantry implements Buffing {
     /**
      * Default constructor
      */
-    public HeroLightInfantry() {
+    public HeroLightInfantry(float x, float y) {
+        super(x, y);
     }
 
     /**

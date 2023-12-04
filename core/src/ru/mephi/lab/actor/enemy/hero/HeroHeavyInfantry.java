@@ -15,7 +15,8 @@ public class HeroHeavyInfantry extends HeavyInfantry implements Buffing {
     /**
      * Default constructor
      */
-    public HeroHeavyInfantry() {
+    public HeroHeavyInfantry(float x, float y) {
+        super(x, y);
     }
 
     /**

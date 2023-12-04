@@ -13,7 +13,8 @@ public class Tower extends BaseActor implements Hittable, Damageable, Updatable 
     /**
      * Default constructor
      */
-    public Tower() {
+    public Tower(float x, float y) {
+        super(x, y);
     }
 
     /**

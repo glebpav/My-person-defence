@@ -9,9 +9,6 @@ import java.util.*;
  */
 public class EnemyArray {
 
-    /**
-     * Default constructor
-     */
     public EnemyArray() {
     }
 

@@ -14,6 +14,8 @@ public class Cell extends Actor {
     public transient Texture texture;
     String texturePath;
 
+    public BaseActor baseActor;
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
@@ -31,8 +33,6 @@ public class Cell extends Actor {
         setWidth(CELL_WIDTH);
         setHeight(CELL_HEIGHT);
     }
-
-    public BaseActor baseActor;
 
     public void setActor(BaseActor baseActor) {
         this.baseActor = baseActor;

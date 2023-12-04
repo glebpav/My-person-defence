@@ -14,7 +14,8 @@ public class Enemy extends BaseActor implements Damageable, Hittable {
     /**
      * Default constructor
      */
-    public Enemy() {
+    public Enemy(float x, float y) {
+        super(x, y);
     }
 
     /**

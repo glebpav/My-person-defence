@@ -11,7 +11,8 @@ public class Fence extends BaseActor implements Hittable {
     /**
      * Default constructor
      */
-    public Fence() {
+    public Fence(float x, float y) {
+        super(x, y);
     }
 
     /**

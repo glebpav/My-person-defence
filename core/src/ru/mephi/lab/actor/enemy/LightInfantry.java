@@ -12,7 +12,8 @@ public class LightInfantry extends Enemy {
     /**
      * Default constructor
      */
-    public LightInfantry() {
+    public LightInfantry(float x, float y) {
+        super(x, y);
     }
 
     /**

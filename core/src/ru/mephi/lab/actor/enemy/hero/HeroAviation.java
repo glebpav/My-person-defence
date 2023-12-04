@@ -15,7 +15,8 @@ public class HeroAviation extends Aviation implements Buffing {
     /**
      * Default constructor
      */
-    public HeroAviation() {
+    public HeroAviation(float x, float y) {
+        super(x, y);
     }
 
     /**

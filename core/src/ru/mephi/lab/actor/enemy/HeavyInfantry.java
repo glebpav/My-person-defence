@@ -12,9 +12,9 @@ public class HeavyInfantry extends Enemy {
     /**
      * Default constructor
      */
-    public HeavyInfantry() {
+    public HeavyInfantry(float x, float y) {
+        super(x, y);
     }
-
     /**
      * 
      */

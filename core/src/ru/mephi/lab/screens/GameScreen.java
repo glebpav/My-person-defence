@@ -2,15 +2,11 @@ package ru.mephi.lab.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.mephi.lab.MyGdxGame;
-import ru.mephi.lab.actor.BaseActor;
 import ru.mephi.lab.level.GameSession;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import static ru.mephi.lab.GameSettings.*;
 
@@ -37,15 +33,15 @@ public class GameScreen extends BaseScreen {
         myGdxGame.camera.update();
     }
 
+    @SuppressWarnings("NewApi")
     public void loadSession(String gameId) {
         gameSession = new GameSession(gameId);
         gameSession.startGame();
-        System.out.println("filed: " + gameSession.field);
-        ArrayList<Actor> cellsActors = gameSession.field.getAllActors();
-        System.out.println(cellsActors.toString());
-        for (Actor actor : cellsActors) {
-            stage.addActor(actor);
-        }
+        ArrayList<Actor> cellsActors = gameSession.field.getAllCells();
+        ArrayList<Actor> actors = gameSession.field.getAllActors();
+
+        cellsActors.forEach(actor -> stage.addActor(actor));
+        actors.forEach(actor -> stage.addActor(actor));
     }
 
     public void handleInput() {
