@@ -18,6 +18,7 @@ public class GameSession {
     private GameState state;
     public GameField field;
     public GameParams params;
+    private int lastGameTick;
     public GameConstructions constructions;
 
     private final String gameId;
@@ -51,6 +52,8 @@ public class GameSession {
         params = JsonProcessor.getDeserializedObject(rootDir + "params.json", GameParams.class);
         constructions = JsonProcessor.getDeserializedObject(rootDir + "constructions.json", GameConstructions.class);
 
+        lastGameTick = params.getCurrentTick();
+
         if (field == null || params == null || constructions == null) {
             state = GameState.LOADING_ERROR;
             return;
@@ -61,38 +64,42 @@ public class GameSession {
     @SuppressWarnings("NewApi")
     public void makeGameStep() {
 
-        ArrayList<Actor> addActors = new ArrayList<>();
-        ArrayList<Actor> deletedActors = new ArrayList<>();
+        if (lastGameTick != params.getCurrentTick()) {
+            ArrayList<Actor> addActors = new ArrayList<>();
+            ArrayList<Actor> deletedActors = new ArrayList<>();
 
-        Cell cell;
+            Cell cell;
 
-        for (Lair lair : constructions.lairArray) {
-            ArrayList<Enemy> newEnemies = lair.getComingOutEnemies(params.getCurrentTick());
+            for (Lair lair : constructions.lairArray) {
+                ArrayList<Enemy> newEnemies = lair.getComingOutEnemies(params.getCurrentTick());
 
-            if (newEnemies != null) {
-                newEnemies.forEach(enemy -> {
-                    // lair.addActor(enemy);
-                    enemy.setX(lair.getX());
-                    enemy.setY(lair.getY());
-                    enemy.loadTexture();
-                    addActors.add(enemy);
+                if (newEnemies != null) {
+                    newEnemies.forEach(enemy -> {
+                        // lair.addActor(enemy);
+                        enemy.setX(lair.getX());
+                        enemy.setY(lair.getY());
+                        enemy.loadTexture();
+                        addActors.add(enemy);
 
-                });
+                    });
+                }
+
+                lair.removeOutEnemies(params.getCurrentTick());
             }
 
-            lair.removeOutEnemies(params.getCurrentTick());
-        }
-
-        for (int x = 0; x < field.fieldHeight; x++) {
-            for (int y = 0; y < field.fieldWidth; y++) {
-                cell = field.field.getCell(x, y);
-                for (BaseActor actor : cell.actorsList) {
-                    // TODO: IMPLEMENT
+            for (int x = 0; x < field.fieldHeight; x++) {
+                for (int y = 0; y < field.fieldWidth; y++) {
+                    cell = field.field.getCell(x, y);
+                    for (BaseActor actor : cell.actorsList) {
+                        // TODO: IMPLEMENT
+                    }
                 }
             }
+
+            if (!addActors.isEmpty()) onFieldChanged.onAddActors(addActors);
         }
 
-        if (!addActors.isEmpty()) onFieldChanged.onAddActors(addActors);
+        lastGameTick = params.getCurrentTick();
         params.nextTick();
     }
 
