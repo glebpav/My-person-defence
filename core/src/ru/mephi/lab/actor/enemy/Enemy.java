@@ -12,6 +12,7 @@ import java.util.*;
 public class Enemy extends BaseActor implements Damageable, Hittable {
 
     public ArrayList<HeroBuff> buffsArray;
+    EnemyType enemyType;
 
     public Enemy(float x, float y) {
         super(x, y);

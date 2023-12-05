@@ -4,9 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.mephi.lab.MyGdxGame;
+import ru.mephi.lab.actor.enemy.EnemyType;
 import ru.mephi.lab.level.GameSession;
+import ru.mephi.lab.utils.way.FieldParser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static ru.mephi.lab.GameSettings.*;
 
@@ -31,6 +34,13 @@ public class GameScreen extends BaseScreen {
 
         myGdxGame.camera.position.set((float) CELL_WIDTH / 2, (float) (gameSession.field.heightInPixels + CELL_HEIGHT / 2), 0);
         myGdxGame.camera.update();
+
+        /*int[][] weightMatrix = FieldParser.parseField(gameSession, EnemyType.LIGHT_INFANTRY);
+
+        for (int[] ar : weightMatrix) {
+            System.out.println(Arrays.toString(ar));
+        }*/
+
     }
 
     @SuppressWarnings("NewApi")

@@ -1,5 +1,6 @@
 package ru.mephi.lab.actor.constructions;
 
+import ru.mephi.lab.actor.ActorType;
 import ru.mephi.lab.actor.BaseActor;
 import ru.mephi.lab.actor.DrawingType;
 import ru.mephi.lab.actor.abilities.Hittable;
@@ -34,6 +35,8 @@ public class Castle extends BaseActor implements Hittable, Updatable {
 
         drawingType = DrawingType.UPDATABLE_TEXTURE;
         selectedFrameIdx = level;
+
+        actorType = ActorType.CASTLE;
     }
 
     @Override

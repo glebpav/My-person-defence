@@ -11,6 +11,7 @@ public class MountainCell extends Cell{
         super(x, y);
         texturePath = TILES_PATH + "cells/lava.png";
         texture = new Texture(texturePath);
+        cellType = CellType.MOUNTAIN;
     }
 
     @Override

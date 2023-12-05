@@ -29,6 +29,7 @@ public class Lair extends BaseActor {
         loadTexture();
 
         drawingType = DrawingType.ONE_TEXTURE;
+        actorType = ActorType.LAIR;
     }
 
     public void addEnemies(EnemyArray enemyArray) {

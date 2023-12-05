@@ -1,5 +1,6 @@
 package ru.mephi.lab.actor.enemy;
 
+import ru.mephi.lab.actor.ActorType;
 import ru.mephi.lab.actor.enemy.Enemy;
 
 import java.util.*;
@@ -23,6 +24,9 @@ public class LightInfantry extends Enemy {
                 TILES_PATH + "enemies/character1_bottom_left.png",
                 TILES_PATH + "enemies/character1_bottom_left.png"
         ));*/
+
+        actorType = ActorType.ENEMY;
+        enemyType = EnemyType.LIGHT_INFANTRY;
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class BaseMatrix<T> {
 
     @SerializedName("width")
-    int width;
+    public int width;
     @SerializedName("height")
     int height;
 

@@ -16,6 +16,7 @@ public class Cell extends Actor {
     public transient Texture texture;
     String texturePath;
 
+    public CellType cellType;
     public ArrayList<BaseActor> actorsList;
 
     public Cell(int x, int y) {

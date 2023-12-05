@@ -4,5 +4,6 @@ public enum ActorType {
     LAIR,
     CASTLE,
     FENCE,
+    TOWER,
     ENEMY
 }

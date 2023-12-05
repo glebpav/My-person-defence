@@ -11,6 +11,7 @@ public class WaterCell extends Cell{
         super(x, y);
         texturePath = TILES_PATH + "cells/water.png";
         texture = new Texture(texturePath);
+        cellType = CellType.WATER;
     }
 
     // TODO: implement this

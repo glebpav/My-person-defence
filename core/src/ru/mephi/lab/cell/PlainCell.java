@@ -11,6 +11,7 @@ public class PlainCell extends Cell{
         super(x, y);
         texturePath = TILES_PATH + "cells/plane.png";
         texture = new Texture(texturePath);
+        cellType = CellType.PLANE;
     }
 
     // TODO: implement this

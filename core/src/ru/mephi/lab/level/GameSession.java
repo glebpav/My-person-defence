@@ -91,7 +91,9 @@ public class GameSession {
                 for (int y = 0; y < field.fieldWidth; y++) {
                     cell = field.field.getCell(x, y);
                     for (BaseActor actor : cell.actorsList) {
-                        // TODO: IMPLEMENT
+
+                        if (actor.actorType == ActorType.ENEMY) ((Enemy) actor).makeStep();
+
                     }
                 }
             }
