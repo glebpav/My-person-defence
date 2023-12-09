@@ -2,6 +2,7 @@ package ru.mephi.lab.actor.enemy;
 
 import ru.mephi.lab.actor.ActorType;
 import ru.mephi.lab.actor.enemy.Enemy;
+import ru.mephi.lab.utils.way.WayProcessor;
 
 import java.util.*;
 
@@ -36,7 +37,7 @@ public class LightInfantry extends Enemy {
     }
 
     @Override
-    public void makeStep() {
+    public void makeStep(WayProcessor wayProcessor) {
 
     }
 

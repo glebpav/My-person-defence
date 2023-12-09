@@ -7,6 +7,8 @@ import ru.mephi.lab.actor.enemy.EnemyType;
 import ru.mephi.lab.cell.Cell;
 import ru.mephi.lab.level.GameSession;
 
+import java.util.ArrayList;
+
 public class WayProcessor {
 
     int fieldWidth;
@@ -18,7 +20,7 @@ public class WayProcessor {
     int[][] heavyInfantryConnectionMatrix;
     int[][] aviationConnectionMatrix;
 
-    WayProcessor(int fieldHeight, int fieldWidth, GameSession gameSession) {
+    public WayProcessor(int fieldHeight, int fieldWidth, GameSession gameSession) {
 
         this.fieldHeight = fieldHeight;
         this.fieldWidth = fieldWidth;
@@ -44,8 +46,21 @@ public class WayProcessor {
 
     public Position getNextPosition(int thisX, int thisY, EnemyType enemyType) {
 
-        Graph graph = new Graph(vertex)
+        System.out.println("here");
+        GraphShortestPath graphShortestPath = new GraphShortestPath();
+        ArrayList<Integer> shortestPath = graphShortestPath.dijkstra(
+                switch (enemyType) {
+                    case AVIATION -> aviationConnectionMatrix;
+                    case HEAVY_INFANTRY -> heavyInfantryConnectionMatrix;
+                    case LIGHT_INFANTRY -> lightInfantryConnectionMatrix;
+                },
+                thisX + thisY * fieldWidth,
+                castleIdx
+        );
 
+        System.out.println("Shortest path: " + shortestPath);
+
+        return null;
     }
 
 

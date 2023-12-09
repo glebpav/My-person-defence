@@ -1,6 +1,7 @@
 package ru.mephi.lab.actor.enemy;
 
 import ru.mephi.lab.actor.enemy.Enemy;
+import ru.mephi.lab.utils.way.WayProcessor;
 
 import java.util.*;
 
@@ -32,7 +33,7 @@ public class HeavyInfantry extends Enemy {
      * @return
      */
     @Override
-    public void makeStep() {
+    public void makeStep(WayProcessor wayProcessor) {
         // TODO implement here
     }
 

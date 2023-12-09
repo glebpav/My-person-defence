@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.mephi.lab.MyGdxGame;
+import ru.mephi.lab.actor.BaseActor;
 import ru.mephi.lab.actor.enemy.EnemyType;
+import ru.mephi.lab.level.GameField;
 import ru.mephi.lab.level.GameSession;
 import ru.mephi.lab.utils.way.FieldParser;
 
@@ -51,14 +53,21 @@ public class GameScreen extends BaseScreen {
         gameSession.getAllActors();
     }
 
-    @SuppressWarnings("NewApi")
-    GameSession.OnFieldChanged onFieldChanged = newActors -> {
-        System.out.println("add new enemy");
-        System.out.println(newActors.size());
-        System.out.println(newActors.get(0).getX());
-        System.out.println(newActors.get(0).getY());
+    GameSession.OnFieldChanged onFieldChanged = new GameSession.OnFieldChanged() {
+        @SuppressWarnings("NewApi")
+        @Override
+        public void onAddActors(ArrayList<Actor> newActors) {
+            newActors.forEach(actor -> stage.addActor(actor));
+        }
 
-        newActors.forEach(actor -> stage.addActor(actor));
+        @SuppressWarnings("NewApi")
+        @Override
+        public void onAddBaseActors(ArrayList<BaseActor> newActors) {
+            newActors.forEach(actor -> stage.addActor(actor));
+            newActors.forEach(actor -> {
+                // gameSession.field.setCeilActor((int) actor.getX(), (int) actor.getY(), actor);
+            });
+        }
     };
 
 

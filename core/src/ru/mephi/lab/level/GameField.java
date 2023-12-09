@@ -37,7 +37,7 @@ public class GameField {
     }
 
     public void setCeilActor(int positionX, int positionY, BaseActor baseActor) {
-        // TODO implement here
+        field.getCell(positionX, positionY).actorsList.add(baseActor);
     }
 
     public BaseActor getCeilActor(int positionX, int positionY) {
@@ -65,8 +65,8 @@ public class GameField {
     }
 
     @SuppressWarnings("NewApi")
-    public ArrayList<Actor> getAllActors() {
-        ArrayList<Actor> actorsList = new ArrayList<>();
+    public ArrayList<BaseActor> getAllActors() {
+        ArrayList<BaseActor> actorsList = new ArrayList<>();
 
         Cell cell;
 

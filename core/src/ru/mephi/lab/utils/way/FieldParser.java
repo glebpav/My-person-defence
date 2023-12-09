@@ -94,7 +94,7 @@ public class FieldParser {
             };
             if (type.priority < finalType.priority) finalType = type;
         }
-        System.out.println(finalType);
+        // System.out.println(finalType);
         return finalType;
     }
 

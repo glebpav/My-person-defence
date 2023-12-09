@@ -3,11 +3,14 @@ package ru.mephi.lab.level;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.mephi.lab.actor.ActorType;
 import ru.mephi.lab.actor.BaseActor;
+import ru.mephi.lab.actor.Position;
 import ru.mephi.lab.actor.constructions.Lair;
 import ru.mephi.lab.actor.enemy.Enemy;
 import ru.mephi.lab.cell.Cell;
 import ru.mephi.lab.utils.files.JsonProcessor;
+import ru.mephi.lab.utils.geometry.GeometryHelper;
 import ru.mephi.lab.utils.idHelper.GameIdProcessor;
+import ru.mephi.lab.utils.way.WayProcessor;
 
 import java.util.ArrayList;
 
@@ -20,6 +23,8 @@ public class GameSession {
     public GameParams params;
     private int lastGameTick;
     public GameConstructions constructions;
+
+    WayProcessor wayProcessor;
 
     private final String gameId;
     private final String gamePath;
@@ -53,6 +58,7 @@ public class GameSession {
         constructions = JsonProcessor.getDeserializedObject(rootDir + "constructions.json", GameConstructions.class);
 
         lastGameTick = params.getCurrentTick();
+        wayProcessor = new WayProcessor(field.fieldHeight, field.fieldWidth, this);
 
         if (field == null || params == null || constructions == null) {
             state = GameState.LOADING_ERROR;
@@ -81,6 +87,12 @@ public class GameSession {
                         enemy.loadTexture();
                         addActors.add(enemy);
 
+                        Position position = GeometryHelper.reverseCoords(lair.getX(), lair.getY());
+                        field.setCeilActor((int) position.x, (int) position.y, enemy);
+                        System.out.println(position.x);
+                        System.out.println(position.y);
+
+                        System.out.println(field.field.getCell(0, 0).actorsList);
                     });
                 }
 
@@ -91,8 +103,11 @@ public class GameSession {
                 for (int y = 0; y < field.fieldWidth; y++) {
                     cell = field.field.getCell(x, y);
                     for (BaseActor actor : cell.actorsList) {
-
-                        if (actor.actorType == ActorType.ENEMY) ((Enemy) actor).makeStep();
+                        System.out.println(actor.actorType);
+                        if (actor.actorType == ActorType.ENEMY) {
+                            System.out.println("make step");
+                            ((Enemy) actor).makeStep(wayProcessor);
+                        }
 
                     }
                 }
@@ -108,12 +123,13 @@ public class GameSession {
     public void getAllActors() {
 
         onFieldChanged.onAddActors(field.getAllCells());
-        onFieldChanged.onAddActors(field.getAllActors());
+        onFieldChanged.onAddBaseActors(field.getAllActors());
 
     }
 
     public interface OnFieldChanged {
         void onAddActors(ArrayList<Actor> newActors);
+        void onAddBaseActors(ArrayList<BaseActor> newActors);
     }
 
 

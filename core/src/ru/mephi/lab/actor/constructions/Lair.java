@@ -4,6 +4,7 @@ import ru.mephi.lab.actor.ActorType;
 import ru.mephi.lab.actor.BaseActor;
 import ru.mephi.lab.actor.DrawingType;
 import ru.mephi.lab.actor.enemy.Enemy;
+import ru.mephi.lab.cell.Cell;
 import ru.mephi.lab.utils.lair.EnemyArray;
 
 import java.util.*;
