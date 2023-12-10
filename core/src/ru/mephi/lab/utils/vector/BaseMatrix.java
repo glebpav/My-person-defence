@@ -18,9 +18,9 @@ public class BaseMatrix<T> {
 
         matrix = new BaseVector<>();
 
-        for (int i = 0; i < height; i++) {
-            matrix.add(new BaseVector<T>());
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < width; i++) {
+            matrix.add(new BaseVector<>());
+            for (int j = 0; j < height; j++) {
                 matrix.get(i).add(null);
             }
         }
@@ -31,7 +31,7 @@ public class BaseMatrix<T> {
     }
 
     public void setCell(int x, int y, T value) {
-        matrix.get(y).set(x, value);
+        matrix.get(x).set(y, value);
     }
 
 }

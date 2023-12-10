@@ -1,8 +1,9 @@
 package ru.mephi.lab.utils.geometry;
 
 import ru.mephi.lab.actor.Position;
+import ru.mephi.lab.actor.constructions.Lair;
 
-import static ru.mephi.lab.GameSettings.CELL_WIDTH;
+import static ru.mephi.lab.GameSettings.*;
 
 public class GeometryHelper {
 
@@ -10,6 +11,13 @@ public class GeometryHelper {
         float x = (inputX - inputY) * (CELL_WIDTH / 2f);
         float y = (inputX + inputY) * (CELL_WIDTH / 4f);
         return new Position(x, y);
+    }
+
+    public static Position convertCoordsToCellCenter(float inputX, float inputY) {
+        Position position = convertCoords(inputX, inputY);
+        position.x += (CELL_WIDTH - LAIR_WIDTH) / 2f;
+        position.y += (0.75f * CELL_HEIGHT - 0.5f * LAIR_HEIGHT + Lair.Y_OFFSET);
+        return position;
     }
 
     public static Position reverseCoords(float inputX, float inputY) {

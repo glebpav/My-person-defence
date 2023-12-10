@@ -23,7 +23,7 @@ public class FieldParser {
         int thisNodeIdx, connectedNodeIdx;
 
         for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width / 2 + width % 2; j++) {
+            for (int j = 0; j < width; j++) {
 
                 thisIdx = new Position(j, i);
                 topIdx = new Position(j, i - 1);
@@ -84,6 +84,7 @@ public class FieldParser {
     private static CellType getCellType(BaseMatrix<Cell> matrix, int x, int y) {
         Cell cell = matrix.getCell(x, y);
         CellType finalType = cell.cellType, type;
+
         for (BaseActor actor : cell.actorsList) {
             if (actor == null) continue;
             type = switch (actor.actorType) {
@@ -95,14 +96,15 @@ public class FieldParser {
             if (type.priority < finalType.priority) finalType = type;
         }
         // System.out.println(finalType);
+
         return finalType;
     }
 
     public static int getWeight(CellType typeFrom, CellType typeTo, EnemyType enemyType) {
         switch (enemyType) {
             case LIGHT_INFANTRY -> {
-                if (typeFrom == CellType.PLANE && typeTo == CellType.PLANE) return 1;
-                return Integer.MAX_VALUE;
+                if (typeFrom == CellType.PLANE && typeTo == CellType.PLANE || typeFrom == CellType.CASTLE) return 1;
+                return 0;
             }
             default -> {
                 return 1;

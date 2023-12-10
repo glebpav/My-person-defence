@@ -14,7 +14,7 @@ import ru.mephi.lab.utils.way.WayProcessor;
 
 import java.util.ArrayList;
 
-import static ru.mephi.lab.GameSettings.DEBUG_MODE;
+import static ru.mephi.lab.GameSettings.*;
 
 public class GameSession {
 
@@ -40,7 +40,7 @@ public class GameSession {
         if (gamePath.isEmpty()) state = GameState.LOADING_ERROR;
     }
 
-    public void setOnFieldChangedListener (OnFieldChanged onFieldChanged) {
+    public void setOnFieldChangedListener(OnFieldChanged onFieldChanged) {
         this.onFieldChanged = onFieldChanged;
     }
 
@@ -76,6 +76,18 @@ public class GameSession {
 
             Cell cell;
 
+            for (int x = 0; x < field.fieldHeight; x++) {
+                for (int y = 0; y < field.fieldWidth; y++) {
+                    cell = field.field.getCell(x, y);
+                    for (BaseActor actor : cell.actorsList) {
+                        System.out.println(actor.actorType);
+                        if (actor.actorType == ActorType.ENEMY) {
+                            ((Enemy) actor).makeStep(wayProcessor);
+                        }
+                    }
+                }
+            }
+
             for (Lair lair : constructions.lairArray) {
                 ArrayList<Enemy> newEnemies = lair.getComingOutEnemies(params.getCurrentTick());
 
@@ -87,30 +99,16 @@ public class GameSession {
                         enemy.loadTexture();
                         addActors.add(enemy);
 
-                        Position position = GeometryHelper.reverseCoords(lair.getX(), lair.getY());
-                        field.setCeilActor((int) position.x, (int) position.y, enemy);
-                        System.out.println(position.x);
-                        System.out.println(position.y);
+                        System.out.println("lair x: " + lair.fieldPosition.x);
+                        System.out.println("lair y: " + lair.fieldPosition.y);
 
-                        System.out.println(field.field.getCell(0, 0).actorsList);
+                        field.setCeilActor((int) lair.fieldPosition.x, (int) lair.fieldPosition.y, enemy);
+
+                        enemy.fieldPosition.setPosition(lair.fieldPosition.x, lair.fieldPosition.y);
                     });
                 }
 
                 lair.removeOutEnemies(params.getCurrentTick());
-            }
-
-            for (int x = 0; x < field.fieldHeight; x++) {
-                for (int y = 0; y < field.fieldWidth; y++) {
-                    cell = field.field.getCell(x, y);
-                    for (BaseActor actor : cell.actorsList) {
-                        System.out.println(actor.actorType);
-                        if (actor.actorType == ActorType.ENEMY) {
-                            System.out.println("make step");
-                            ((Enemy) actor).makeStep(wayProcessor);
-                        }
-
-                    }
-                }
             }
 
             if (!addActors.isEmpty()) onFieldChanged.onAddActors(addActors);
@@ -129,6 +127,7 @@ public class GameSession {
 
     public interface OnFieldChanged {
         void onAddActors(ArrayList<Actor> newActors);
+
         void onAddBaseActors(ArrayList<BaseActor> newActors);
     }
 

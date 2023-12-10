@@ -8,6 +8,7 @@ import ru.mephi.lab.cell.Cell;
 import ru.mephi.lab.level.GameSession;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class WayProcessor {
 
@@ -44,9 +45,12 @@ public class WayProcessor {
         return -1;
     }
 
+    @SuppressWarnings("NewApi")
     public Position getNextPosition(int thisX, int thisY, EnemyType enemyType) {
+        Arrays.stream(lightInfantryConnectionMatrix).forEach(ints -> {
+            System.out.println(Arrays.toString(ints));
+        });
 
-        System.out.println("here");
         GraphShortestPath graphShortestPath = new GraphShortestPath();
         ArrayList<Integer> shortestPath = graphShortestPath.dijkstra(
                 switch (enemyType) {
@@ -58,9 +62,11 @@ public class WayProcessor {
                 castleIdx
         );
 
-        System.out.println("Shortest path: " + shortestPath);
+        System.out.println("shortest path: " + shortestPath);
 
-        return null;
+        if (shortestPath == null || shortestPath.isEmpty()) return null;
+
+        return new Position(shortestPath.get(0) % fieldWidth, (float) (shortestPath.get(0) / fieldWidth));
     }
 
 

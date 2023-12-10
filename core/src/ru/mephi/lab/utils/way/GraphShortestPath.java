@@ -48,8 +48,12 @@ class GraphShortestPath {
         while (nodeIdx != srcNode) {
             path.add(nodeIdx);
             nodeIdx = nodeIdxFrom[nodeIdx];
-            if (nodeIdx == -1) break;
+            if (nodeIdx == -1) {
+                path.add(-1);
+                break;
+            }
         }
+        System.out.println("path: " + path);
 
         if (path.contains(-1)) return null;
         Collections.reverse(path);

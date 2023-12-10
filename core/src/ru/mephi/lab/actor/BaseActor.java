@@ -27,9 +27,10 @@ public class BaseActor extends Actor implements Indescribable {
         setY(y);
 
         drawingType = DrawingType.ONE_TEXTURE;
+        fieldPosition = new Position();
     }
 
-    public Position position;
+    public Position fieldPosition;
 
     public boolean readDescription(String path) {
         // TODO implement here

@@ -49,12 +49,12 @@ public class GameField {
         ArrayList<Actor> actorsList = new ArrayList<>();
 
         for (int i = 0; i < fieldHeight; i++) {
-            for (int j = 0; j < fieldHeight; j++) {
+            for (int j = 0; j < fieldWidth; j++) {
 
                 // float x = (i - j) * (CELL_WIDTH / 2f);
                 // float y = (i + j) * (CELL_WIDTH / 4f);
 
-                field.getCell(i, j).loadTexture();
+                field.getCell(j, i).loadTexture();
                 actorsList.add(field.getCell(i, j));
             }
         }
@@ -71,15 +71,12 @@ public class GameField {
         Cell cell;
 
         for (int i = 0; i < fieldHeight; i++) {
-            for (int j = 0; j < fieldHeight; j++) {
+            for (int j = 0; j < fieldWidth; j++) {
 
-                // float x = (i - j) * (CELL_WIDTH / 2f);
-                // float y = (i + j) * (CELL_WIDTH / 4f);
-
-                cell = field.getCell(i, j);
+                cell = field.getCell(j, i);
                 cell.loadTexture();
 
-                if (!field.getCell(i, j).actorsList.isEmpty()) {
+                if (!field.getCell(j, i).actorsList.isEmpty()) {
                     cell.actorsList.forEach(actor -> {
                         actor.loadTexture();
                         actorsList.add(actor);

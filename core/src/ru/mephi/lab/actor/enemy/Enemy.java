@@ -28,8 +28,20 @@ public class Enemy extends BaseActor implements Damageable, Hittable {
     }
 
     public void makeStep(WayProcessor wayProcessor) {
-        Position postition = GeometryHelper.reverseCoords(getX(), getY());
-        wayProcessor.getNextPosition((int) postition.x, (int) postition.y, enemyType);
+
+        System.out.println("Enemy field position x: " + fieldPosition.x);
+        System.out.println("Enemy field position y: " + fieldPosition.y);
+
+        Position nextPosition = wayProcessor.getNextPosition((int) fieldPosition.x, (int) fieldPosition.y, enemyType);
+
+        if (nextPosition != null) {
+            fieldPosition.setPosition(nextPosition.x, nextPosition.y);
+        }
+
+        Position position = GeometryHelper.convertCoordsToCellCenter(fieldPosition.x, fieldPosition.y);
+
+        setX(position.x);
+        setY(position.y);
     }
 
     @Override
