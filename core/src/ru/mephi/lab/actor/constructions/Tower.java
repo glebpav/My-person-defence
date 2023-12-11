@@ -8,7 +8,7 @@ import ru.mephi.lab.actor.abilities.Updatable;
 /**
  * 
  */
-public class Tower extends BaseActor implements Hittable, Damageable, Updatable {
+public class Tower extends BaseActor implements Hittable, Updatable {
 
     /**
      * Default constructor
@@ -38,8 +38,8 @@ public class Tower extends BaseActor implements Hittable, Damageable, Updatable 
     }
 
     @Override
-    public void getDamage(double damage) {
-
+    public boolean getDamage(double damage) {
+        return false;
     }
 
     @Override

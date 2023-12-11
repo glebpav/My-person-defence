@@ -15,7 +15,7 @@ public class WayProcessor {
     int fieldWidth;
     int fieldHeight;
 
-    int castleIdx;
+    public Position castlePosition;
 
     int[][] lightInfantryConnectionMatrix;
     int[][] heavyInfantryConnectionMatrix;
@@ -26,30 +26,30 @@ public class WayProcessor {
         this.fieldHeight = fieldHeight;
         this.fieldWidth = fieldWidth;
 
-        castleIdx = getCastleIdx(gameSession);
+        castlePosition = getCastlePosition(gameSession);
 
         lightInfantryConnectionMatrix = FieldParser.parseField(gameSession, EnemyType.LIGHT_INFANTRY);
         heavyInfantryConnectionMatrix = FieldParser.parseField(gameSession, EnemyType.HEAVY_INFANTRY);
         aviationConnectionMatrix = FieldParser.parseField(gameSession, EnemyType.AVIATION);
     }
 
-    private int getCastleIdx(GameSession gameSession) {
+    private Position getCastlePosition(GameSession gameSession) {
         for (int i = 0; i < fieldHeight; i++) {
             for (int j = 0; j < fieldWidth; j++) {
                 Cell cell = gameSession.field.field.getCell(j, i);
                 for (BaseActor actor : cell.actorsList) {
-                    if (actor.actorType == ActorType.CASTLE) return i * fieldWidth + j;
+                    if (actor.actorType == ActorType.CASTLE) return new Position(j, i);
                 }
             }
         }
-        return -1;
+        return null;
     }
 
     @SuppressWarnings("NewApi")
     public Position getNextPosition(int thisX, int thisY, EnemyType enemyType) {
-        Arrays.stream(lightInfantryConnectionMatrix).forEach(ints -> {
+        /*Arrays.stream(lightInfantryConnectionMatrix).forEach(ints -> {
             System.out.println(Arrays.toString(ints));
-        });
+        });*/
 
         GraphShortestPath graphShortestPath = new GraphShortestPath();
         ArrayList<Integer> shortestPath = graphShortestPath.dijkstra(
@@ -59,14 +59,21 @@ public class WayProcessor {
                     case LIGHT_INFANTRY -> lightInfantryConnectionMatrix;
                 },
                 thisX + thisY * fieldWidth,
-                castleIdx
+                (int) (castlePosition.x + castlePosition.y * fieldWidth)
         );
 
-        System.out.println("shortest path: " + shortestPath);
+        // System.out.println("shortest path: " + shortestPath);
 
         if (shortestPath == null || shortestPath.isEmpty()) return null;
 
         return new Position(shortestPath.get(0) % fieldWidth, (float) (shortestPath.get(0) / fieldWidth));
+    }
+
+    public void updateConnectionsMatrix(GameSession gameSession) {
+        System.out.println("Update connection matrix");
+        lightInfantryConnectionMatrix = FieldParser.parseField(gameSession, EnemyType.LIGHT_INFANTRY);
+        heavyInfantryConnectionMatrix = FieldParser.parseField(gameSession, EnemyType.HEAVY_INFANTRY);
+        aviationConnectionMatrix = FieldParser.parseField(gameSession, EnemyType.AVIATION);
     }
 
 

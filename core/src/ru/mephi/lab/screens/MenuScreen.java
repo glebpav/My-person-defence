@@ -46,7 +46,6 @@ public class MenuScreen extends BaseScreen {
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println(myGdxGame.gameIdProcessor.idHandler.getGamePathById(select.getSelected()));
                 myGdxGame.gameScreen.loadSession(select.getSelected());
                 myGdxGame.setScreen(myGdxGame.gameScreen);
             }

@@ -1,33 +1,33 @@
 package ru.mephi.lab.actor.constructions;
 
+import ru.mephi.lab.actor.ActorType;
 import ru.mephi.lab.actor.BaseActor;
+import ru.mephi.lab.actor.DrawingType;
 import ru.mephi.lab.actor.abilities.Hittable;
 
-/**
- * 
- */
+import static ru.mephi.lab.GameSettings.*;
+
 public class Fence extends BaseActor implements Hittable {
 
-    /**
-     * Default constructor
-     */
+
     public Fence(float x, float y) {
-        super(x, y);
+        super(x + (CELL_WIDTH - CONSTRUCTION_WIDTH) / 2f, y + (0.75f * CELL_HEIGHT - 0.5f * CONSTRUCTION_HEIGHT + Lair.Y_OFFSET));
+
+        setWidth(CONSTRUCTION_WIDTH);
+        setHeight(CONSTRUCTION_HEIGHT);
+        texturePath = TILES_PATH + "fence/fence.png";
+        loadTexture();
+
+        healthPoints = 1;
+        drawingType = DrawingType.ONE_TEXTURE;
+        actorType = ActorType.FENCE;
+
     }
 
-    /**
-     * 
-     */
     public double hitPoints;
 
-    /**
-     * 
-     */
     public double maxHitPoints;
 
-    /**
-     * 
-     */
     public double speedOfRegeneration;
 
 
@@ -37,8 +37,8 @@ public class Fence extends BaseActor implements Hittable {
     }
 
     @Override
-    public void getDamage(double damage) {
-
+    public boolean getDamage(double damage) {
+        return false;
     }
 
     @Override

@@ -4,7 +4,6 @@ import ru.mephi.lab.actor.ActorType;
 import ru.mephi.lab.actor.BaseActor;
 import ru.mephi.lab.actor.DrawingType;
 import ru.mephi.lab.actor.enemy.Enemy;
-import ru.mephi.lab.cell.Cell;
 import ru.mephi.lab.utils.lair.EnemyArray;
 
 import java.util.*;
@@ -21,12 +20,12 @@ public class Lair extends BaseActor {
     public ArrayList<EnemyArray> enemyAppearanceTime;
 
     public Lair(float x, float y) {
-        super(x + (CELL_WIDTH - LAIR_WIDTH) / 2f, y + (0.75f * CELL_HEIGHT - 0.5f * LAIR_HEIGHT + Lair.Y_OFFSET));
-        actorType = ActorType.LAIR;
+        super(x + (CELL_WIDTH - CONSTRUCTION_WIDTH) / 2f, y + (0.75f * CELL_HEIGHT - 0.5f * CONSTRUCTION_HEIGHT + Lair.Y_OFFSET));
+        // actorType = ActorType.LAIR;
         enemyAppearanceTime = new ArrayList<>();
 
-        setWidth(LAIR_WIDTH);
-        setHeight(LAIR_HEIGHT);
+        setWidth(CONSTRUCTION_WIDTH);
+        setHeight(CONSTRUCTION_HEIGHT);
         texturePath = TILES_PATH + "lair/lair.png";
         loadTexture();
 

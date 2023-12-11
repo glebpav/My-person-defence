@@ -95,7 +95,6 @@ public class FieldParser {
             };
             if (type.priority < finalType.priority) finalType = type;
         }
-        // System.out.println(finalType);
 
         return finalType;
     }
@@ -104,6 +103,10 @@ public class FieldParser {
         switch (enemyType) {
             case LIGHT_INFANTRY -> {
                 if (typeFrom == CellType.PLANE && typeTo == CellType.PLANE || typeFrom == CellType.CASTLE) return 1;
+                return 0;
+            }
+            case AVIATION -> {
+                if (typeTo != CellType.MOUNTAIN) return 1;
                 return 0;
             }
             default -> {

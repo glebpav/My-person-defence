@@ -53,7 +53,6 @@ class GraphShortestPath {
                 break;
             }
         }
-        System.out.println("path: " + path);
 
         if (path.contains(-1)) return null;
         Collections.reverse(path);

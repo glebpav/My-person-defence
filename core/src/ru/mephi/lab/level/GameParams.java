@@ -2,9 +2,11 @@ package ru.mephi.lab.level;
 
 import com.google.gson.annotations.SerializedName;
 
+import static ru.mephi.lab.GameSettings.TICK_DURATION;
+
 public class GameParams {
 
-    public static final int TICK_DURATION = 60;
+
 
     @SerializedName("currentTick")
     private int currentTick;
@@ -12,7 +14,6 @@ public class GameParams {
     private int currentBank;
 
     public int getCurrentTick() {
-        // System.out.println(currentTick / TICK_DURATION);
         return currentTick / TICK_DURATION;
     }
 

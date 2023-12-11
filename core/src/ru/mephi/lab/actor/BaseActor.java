@@ -3,17 +3,21 @@ package ru.mephi.lab.actor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import ru.mephi.lab.actor.abilities.Damageable;
+import ru.mephi.lab.actor.abilities.Hittable;
 import ru.mephi.lab.actor.abilities.Indescribable;
+import ru.mephi.lab.level.GameField;
 
 import java.util.ArrayList;
 
 
-public class BaseActor extends Actor implements Indescribable {
+public class BaseActor extends Actor implements Damageable, Hittable {
 
     protected DrawingType drawingType;
 
     public ActorType actorType;
 
+    public double healthPoints;
     protected transient Texture texture;
     protected transient ArrayList<Texture> texturesArray;
 
@@ -32,16 +36,6 @@ public class BaseActor extends Actor implements Indescribable {
 
     public Position fieldPosition;
 
-    public boolean readDescription(String path) {
-        // TODO implement here
-        return false;
-    }
-
-    public boolean writeDescription(String path) {
-        // TODO implement here
-        return false;
-    }
-
     @SuppressWarnings("NewApi")
     public void loadTexture() {
         switch (drawingType) {
@@ -51,7 +45,6 @@ public class BaseActor extends Actor implements Indescribable {
             case UPDATABLE_TEXTURE, ANIMATING_TEXTURE -> {
                 texturesArray = new ArrayList<>();
                 texturePathArray.forEach(path -> texturesArray.add(new Texture(path)));
-                System.out.println("here");
             }
         }
     }
@@ -74,5 +67,42 @@ public class BaseActor extends Actor implements Indescribable {
         }
 
 
+    }
+
+    @Override
+    public float makeDamage() {
+        return 0;
+    }
+
+    @Override
+    public float makeDamageFence() {
+        return 0;
+    }
+
+    @Override
+    public boolean shouldAttack(int castleX, int castleY) {
+        return false;
+    }
+
+    @Override
+    public BaseActor shouldAttackFence(GameField gameField) {
+        return null;
+    }
+
+    @Override
+    public void regenerateHitPoints() {
+
+    }
+
+    @Override
+    public boolean getDamage(double damage) {
+        healthPoints -= damage;
+        // System.out.println("left healthPoints: " + healthPoints);
+        return healthPoints <= 0;
+    }
+
+    @Override
+    public boolean isAlive() {
+        return false;
     }
 }

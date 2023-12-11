@@ -16,7 +16,7 @@ public interface Hittable {
      * @param double damage
      * @return
      */
-    public void getDamage(double damage);
+    public boolean getDamage(double damage);
 
     /**
      * @return

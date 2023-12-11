@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -38,6 +39,7 @@ public class BaseScreen extends ScreenAdapter {
     public void render(float delta) {
         ScreenUtils.clear(Color.GRAY);
         stage.act(delta);
+        Group group = new Group();
         stage.draw();
     }
 }

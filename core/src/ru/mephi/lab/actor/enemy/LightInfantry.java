@@ -1,21 +1,17 @@
 package ru.mephi.lab.actor.enemy;
 
 import ru.mephi.lab.actor.ActorType;
-import ru.mephi.lab.actor.enemy.Enemy;
-import ru.mephi.lab.utils.way.WayProcessor;
-
-import java.util.*;
 
 import static ru.mephi.lab.GameSettings.*;
 
 public class LightInfantry extends Enemy {
 
-    private double probabiltyAvoidHit;
+    private double probabilityAvoidHit;
 
     public LightInfantry(float x, float y) {
         super(x, y);
-        setWidth(LIGHT_INFANTRY_WIDTH);
-        setHeight(LIGHT_INFANTRY_HEIGHT);
+        setWidth(CHARACTER_WIDTH);
+        setHeight(CHARACTER_HEIGHT);
 
         texturePath = TILES_PATH + "enemies/char1.png";
 
@@ -26,24 +22,17 @@ public class LightInfantry extends Enemy {
                 TILES_PATH + "enemies/character1_bottom_left.png"
         ));*/
 
+        damageRatio = 0.5f;
+        healthPoints = 100;
         actorType = ActorType.ENEMY;
         enemyType = EnemyType.LIGHT_INFANTRY;
     }
 
-    @Override
-    public float makeDamage() {
-        // TODO implement here
-        return 0;
+    public LightInfantry(float x, float y, float healthPoints) {
+        this(x, y);
+        this.healthPoints = healthPoints;
     }
 
-    @Override
-    public void makeStep(WayProcessor wayProcessor) {
-
-    }
-
-    /**
-     * @return
-     */
     public void regenerateHipPoints() {
         // TODO implement here
     }

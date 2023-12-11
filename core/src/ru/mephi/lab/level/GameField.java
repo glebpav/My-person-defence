@@ -40,9 +40,8 @@ public class GameField {
         field.getCell(positionX, positionY).actorsList.add(baseActor);
     }
 
-    public BaseActor getCeilActor(int positionX, int positionY) {
-
-        return null;
+    public ArrayList<BaseActor> getCeilActor(int positionX, int positionY) {
+        return field.getCell(positionX, positionY).actorsList;
     }
 
     public ArrayList<Actor> getAllCells() {

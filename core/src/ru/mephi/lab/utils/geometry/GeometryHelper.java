@@ -15,8 +15,8 @@ public class GeometryHelper {
 
     public static Position convertCoordsToCellCenter(float inputX, float inputY) {
         Position position = convertCoords(inputX, inputY);
-        position.x += (CELL_WIDTH - LAIR_WIDTH) / 2f;
-        position.y += (0.75f * CELL_HEIGHT - 0.5f * LAIR_HEIGHT + Lair.Y_OFFSET);
+        position.x += (CELL_WIDTH - CONSTRUCTION_WIDTH) / 2f;
+        position.y += (0.75f * CELL_HEIGHT - 0.5f * CONSTRUCTION_HEIGHT + Lair.Y_OFFSET);
         return position;
     }
 

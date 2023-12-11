@@ -3,46 +3,51 @@ package ru.mephi.lab.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import ru.mephi.lab.GameSettings;
 import ru.mephi.lab.MyGdxGame;
 import ru.mephi.lab.actor.BaseActor;
-import ru.mephi.lab.actor.enemy.EnemyType;
-import ru.mephi.lab.level.GameField;
+import ru.mephi.lab.actor.ui.Blackout;
 import ru.mephi.lab.level.GameSession;
-import ru.mephi.lab.utils.way.FieldParser;
+import ru.mephi.lab.level.GameState;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static ru.mephi.lab.GameSettings.*;
 
 public class GameScreen extends BaseScreen {
 
     GameSession gameSession;
+    Group loosedStateGroup;
 
     public GameScreen(MyGdxGame myGdxGame) {
         super(myGdxGame);
+
+        loosedStateGroup = new Group();
+        loosedStateGroup.addActor(new Blackout());
+        stage.addActor(loosedStateGroup);
+
+        loosedStateGroup.setVisible(false);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
         handleInput();
-        gameSession.makeGameStep();
+
+        if (gameSession.state == GameState.ACTIVE) {
+            gameSession.makeGameStep();
+        } else {
+            myGdxGame.camera.position.set((float) SCREEN_WIDTH / 2, (float) SCREEN_HEIGHT / 2, 0);
+            myGdxGame.setScreen(myGdxGame.afterGameMenuScreen);
+        }
     }
 
     @Override
     public void show() {
         super.show();
-
         myGdxGame.camera.position.set((float) CELL_WIDTH / 2, (float) (gameSession.field.heightInPixels + CELL_HEIGHT / 2), 0);
         myGdxGame.camera.update();
-
-        /*int[][] weightMatrix = FieldParser.parseField(gameSession, EnemyType.LIGHT_INFANTRY);
-
-        for (int[] ar : weightMatrix) {
-            System.out.println(Arrays.toString(ar));
-        }*/
-
     }
 
     @SuppressWarnings("NewApi")
@@ -68,30 +73,34 @@ public class GameScreen extends BaseScreen {
                 // gameSession.field.setCeilActor((int) actor.getX(), (int) actor.getY(), actor);
             });
         }
+
+        @Override
+        public void onRemoveActors(ArrayList<Actor> removedActors) {
+            for (Actor actor: stage.getActors()) {
+                if (removedActors.contains(actor))
+                    actor.remove();
+            }
+        }
     };
 
 
     public void handleInput() {
 
-        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             myGdxGame.camera.zoom -= 0.003f;
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             myGdxGame.camera.zoom += 0.003f;
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.P)) {
-            System.out.println(myGdxGame.camera.position);
-        }
-
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             myGdxGame.camera.position.x -= 1;
-        }else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             myGdxGame.camera.position.x += 1;
-        }else if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             myGdxGame.camera.position.y += 1;
-        }else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             myGdxGame.camera.position.y -= 1;
         }
 

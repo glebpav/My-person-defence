@@ -11,7 +11,10 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import ru.mephi.lab.actor.Position;
 import ru.mephi.lab.actor.constructions.Castle;
+import ru.mephi.lab.actor.constructions.Fence;
 import ru.mephi.lab.actor.constructions.Lair;
+import ru.mephi.lab.actor.enemy.Aviation;
+import ru.mephi.lab.actor.enemy.Enemy;
 import ru.mephi.lab.actor.enemy.LightInfantry;
 import ru.mephi.lab.cell.Cell;
 import ru.mephi.lab.cell.MountainCell;
@@ -20,6 +23,7 @@ import ru.mephi.lab.cell.WaterCell;
 import ru.mephi.lab.level.GameConstructions;
 import ru.mephi.lab.level.GameField;
 import ru.mephi.lab.level.GameSession;
+import ru.mephi.lab.screens.AfterGameMenuScreen;
 import ru.mephi.lab.screens.GameScreen;
 import ru.mephi.lab.screens.MenuScreen;
 import ru.mephi.lab.utils.files.JsonProcessor;
@@ -45,13 +49,13 @@ public class MyGdxGame extends Game {
 
     public GameScreen gameScreen;
     public MenuScreen menuScreen;
+    public AfterGameMenuScreen afterGameMenuScreen;
 
     @Override
     public void create() {
 
         GameField gameField = new GameField(10, 10);
         GameConstructions gameConstructions = new GameConstructions();
-        Random rn = new Random();
 
         int[][] matrix = {
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -65,12 +69,6 @@ public class MyGdxGame extends Game {
                 {1, 1, 1, 1, 3, 1, 3, 1, 1, 1},
                 {1, 1, 1, 1, 1, 1, 3, 1, 1, 1}
         };
-
-        /*int[][] matrix = {
-                {1, 1, 2},
-                {1, 2, 1},
-                {1, 1, 1},
-        };*/
 
         for (int i = gameField.fieldWidth - 1; i >= 0; i--) {
             for (int j = gameField.fieldHeight - 1; j >= 0; j--) {
@@ -99,11 +97,9 @@ public class MyGdxGame extends Game {
         float fy = cell.getY();
         float fy2 = cell1.getY();
 
-
-
         EnemyArray enemyArray = new EnemyArray(2, new ArrayList<>(Arrays.asList(new LightInfantry(fx, fy))));
-        EnemyArray enemyArray2 = new EnemyArray(4, new ArrayList<>(Arrays.asList(new LightInfantry(fx, fy))));
-        EnemyArray enemyArray3 = new EnemyArray(5, new ArrayList<>(Arrays.asList(new LightInfantry(fx2, fy2))));
+        EnemyArray enemyArray2 = new EnemyArray(20, new ArrayList<>(Arrays.asList(new LightInfantry(fx, fy))));
+        EnemyArray enemyArray3 = new EnemyArray(7, new ArrayList<>(Arrays.asList(new Aviation(fx2, fy2))));
 
         Lair lair = new Lair(fx, fy);
         lair.fieldPosition.setPosition(0, 1);
@@ -113,7 +109,6 @@ public class MyGdxGame extends Game {
         Lair lair2 = new Lair(fx2, fy2);
         lair.fieldPosition.setPosition(1, 0);
         lair.addEnemies(enemyArray3);
-
 
         cell.addActor(lair);
         cell1.addActor(lair2);
@@ -129,6 +124,15 @@ public class MyGdxGame extends Game {
         cell.addActor(castle);
         gameConstructions.setCastle(castle);
 
+        cell = gameField.field.getCell(4, 9);
+
+        fx = cell.getX();
+        fy = cell.getY();
+
+        Fence fence = new Fence(fx, fy);
+        cell.addActor(fence);
+        gameConstructions.addFence(fence);
+
         JsonProcessor.serializeObjectAndWrite("assets/systemFiles/gameSaves/gameAFG2Bae323vr/field.json", gameField);
         JsonProcessor.serializeObjectAndWrite("assets/systemFiles/gameSaves/gameAFG2Bae323vr/constructions.json", gameConstructions);
 
@@ -143,6 +147,7 @@ public class MyGdxGame extends Game {
 
         gameScreen = new GameScreen(this);
         menuScreen = new MenuScreen(this);
+        afterGameMenuScreen = new AfterGameMenuScreen(this);
 
         setScreen(menuScreen);
 

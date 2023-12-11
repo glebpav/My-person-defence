@@ -18,7 +18,6 @@ public class Castle extends BaseActor implements Hittable, Updatable {
     public static int Y_OFFSET = 10;
 
     public int level;
-    public double hitPoints;
     public double speedOfRegeneration;
 
     public Castle(int level, float x, float y) {
@@ -36,7 +35,13 @@ public class Castle extends BaseActor implements Hittable, Updatable {
         drawingType = DrawingType.UPDATABLE_TEXTURE;
         selectedFrameIdx = level;
 
+        healthPoints = 150;
         actorType = ActorType.CASTLE;
+    }
+
+    public Castle(int level, float x, float y, double healthPoints) {
+        this(level, x, y);
+        this.healthPoints = healthPoints;
     }
 
     @Override
@@ -45,8 +50,10 @@ public class Castle extends BaseActor implements Hittable, Updatable {
     }
 
     @Override
-    public void getDamage(double damage) {
-
+    public boolean getDamage(double damage) {
+        healthPoints -= damage;
+        // System.out.println("left healthPoints: " + healthPoints);
+        return healthPoints <= 0;
     }
 
     @Override
