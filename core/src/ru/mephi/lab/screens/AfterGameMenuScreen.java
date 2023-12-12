@@ -26,6 +26,7 @@ public class AfterGameMenuScreen extends BaseScreen {
         stage.addActor(wonActorsGroup);
 
         initLoosedActorsGroup();
+        initWonActorsGroup();
 
     }
 
@@ -38,14 +39,14 @@ public class AfterGameMenuScreen extends BaseScreen {
 
         if (myGdxGame.gameScreen.gameSession.state == GameState.LOOSED) {
             loosedActorsGroup.setVisible(true);
-        } else if (myGdxGame.gameScreen.gameSession.state == GameState.PAUSED) {
+        } else if (myGdxGame.gameScreen.gameSession.state == GameState.ENDED) {
             wonActorsGroup.setVisible(true);
         }
     }
 
     public void initLoosedActorsGroup() {
         Table rootTable = new Table();
-        Label label = new Label("Whooops, you loosed", myGdxGame.skin);
+        Label label = new Label("Whoops, you loosed", myGdxGame.skin);
         Button startButton = new TextButton("go to menu", myGdxGame.skin);
 
         label.setFontScale(2);
@@ -64,6 +65,28 @@ public class AfterGameMenuScreen extends BaseScreen {
                 myGdxGame.setScreen(myGdxGame.menuScreen);
             }
         });
+    }
 
+    public void initWonActorsGroup() {
+        Table rootTable = new Table();
+        Label label = new Label("Wu-aha, you won, congratulations", myGdxGame.skin);
+        Button startButton = new TextButton("go to menu", myGdxGame.skin);
+
+        label.setFontScale(2);
+
+        rootTable.setBounds(0, 0, GameSettings.SCREEN_WIDTH, GameSettings.SCREEN_HEIGHT);
+        // rootTable.setFillParent(true);
+        rootTable.add(label).height(60).spaceBottom(200);
+        rootTable.row();
+        rootTable.add(startButton).width(400).height(60);
+
+        wonActorsGroup.addActor(rootTable);
+
+        startButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                myGdxGame.setScreen(myGdxGame.menuScreen);
+            }
+        });
     }
 }

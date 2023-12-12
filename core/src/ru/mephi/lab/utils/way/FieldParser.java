@@ -40,7 +40,6 @@ public class FieldParser {
                             getCellType(field.field, (int) topIdx.x, (int) topIdx.y),
                             enemyType
                     );
-                    connectionMatrix[connectedNodeIdx][thisNodeIdx] = connectionMatrix[thisNodeIdx][connectedNodeIdx];
                 }
 
                 if (bottomIdx.y < height) {
@@ -50,7 +49,6 @@ public class FieldParser {
                             getCellType(field.field, (int) bottomIdx.x, (int) bottomIdx.y),
                             enemyType
                     );
-                    connectionMatrix[connectedNodeIdx][thisNodeIdx] = connectionMatrix[thisNodeIdx][connectedNodeIdx];
                 }
 
                 if (leftIdx.x >= 0) {
@@ -60,7 +58,6 @@ public class FieldParser {
                             getCellType(field.field, (int) leftIdx.x, (int) leftIdx.y),
                             enemyType
                     );
-                    connectionMatrix[connectedNodeIdx][thisNodeIdx] = connectionMatrix[thisNodeIdx][connectedNodeIdx];
                 }
 
                 if (rightIdx.x < width) {
@@ -70,7 +67,6 @@ public class FieldParser {
                             getCellType(field.field, (int) rightIdx.x, (int) rightIdx.y),
                             enemyType
                     );
-                    connectionMatrix[connectedNodeIdx][thisNodeIdx] = connectionMatrix[thisNodeIdx][connectedNodeIdx];
                 }
 
             }
@@ -102,11 +98,11 @@ public class FieldParser {
     public static int getWeight(CellType typeFrom, CellType typeTo, EnemyType enemyType) {
         switch (enemyType) {
             case LIGHT_INFANTRY -> {
-                if (typeFrom == CellType.PLANE && typeTo == CellType.PLANE || typeFrom == CellType.CASTLE) return 1;
+                if (typeTo == CellType.PLANE || typeTo == CellType.CASTLE) return 1;
                 return 0;
             }
             case AVIATION -> {
-                if (typeTo != CellType.MOUNTAIN) return 1;
+                if (typeTo != CellType.MOUNTAIN && typeFrom != CellType.MOUNTAIN) return 1;
                 return 0;
             }
             default -> {

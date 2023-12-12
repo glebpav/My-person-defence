@@ -74,6 +74,9 @@ public class GameSession {
     public void makeGameStep() {
 
         if (lastGameTick != params.getCurrentTick()) {
+
+            boolean hasAnyEnemyFound = false;
+
             ArrayList<Actor> addActors = new ArrayList<>();
             ArrayList<Actor> deletedActors = new ArrayList<>();
 
@@ -87,8 +90,11 @@ public class GameSession {
                     for (int i = 0; i < cell.actorsList.size(); i++) {
                         BaseActor actor = cell.actorsList.get(i);
                         if (actor.actorType == ActorType.ENEMY) {
+
                             ((Enemy) actor).makeStep(wayProcessor);
                             boolean didAttack = false;
+                            hasAnyEnemyFound = true;
+
                             switch (((Enemy) actor).enemyType) {
                                 case LIGHT_INFANTRY, AVIATION -> {
                                     if (actor.shouldAttack((int) wayProcessor.castlePosition.x, (int) wayProcessor.castlePosition.y)) {
@@ -148,6 +154,7 @@ public class GameSession {
 
             for (Lair lair : constructions.lairArray) {
                 ArrayList<Enemy> newEnemies = lair.getComingOutEnemies(params.getCurrentTick());
+                hasAnyEnemyFound = hasAnyEnemyFound || !lair.enemyAppearanceTime.isEmpty();
 
                 if (newEnemies != null) {
                     newEnemies.forEach(enemy -> {
@@ -166,6 +173,11 @@ public class GameSession {
 
             if (!deletedActors.isEmpty()) onFieldChanged.onRemoveActors(deletedActors);
             if (!addActors.isEmpty()) onFieldChanged.onAddActors(addActors);
+
+            if (!hasAnyEnemyFound) {
+                state = GameState.ENDED;
+            }
+
         }
 
         lastGameTick = params.getCurrentTick();

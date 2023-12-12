@@ -103,6 +103,6 @@ public class BaseActor extends Actor implements Damageable, Hittable {
 
     @Override
     public boolean isAlive() {
-        return false;
+        return healthPoints > 0;
     }
 }
