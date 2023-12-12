@@ -12,21 +12,13 @@ import java.util.*;
  */
 public class HeroHeavyInfantry extends HeavyInfantry implements Buffing {
 
-    /**
-     * Default constructor
-     */
+
     public HeroHeavyInfantry(float x, float y) {
         super(x, y);
     }
 
-    /**
-     * 
-     */
     public int radiusBuff;
 
-    /**
-     * 
-     */
     public HeroBuff appliedBuff;
 
     @Override

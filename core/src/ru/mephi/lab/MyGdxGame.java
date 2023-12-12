@@ -15,6 +15,7 @@ import ru.mephi.lab.actor.constructions.Fence;
 import ru.mephi.lab.actor.constructions.Lair;
 import ru.mephi.lab.actor.enemy.Aviation;
 import ru.mephi.lab.actor.enemy.Enemy;
+import ru.mephi.lab.actor.enemy.HeavyInfantry;
 import ru.mephi.lab.actor.enemy.LightInfantry;
 import ru.mephi.lab.cell.Cell;
 import ru.mephi.lab.cell.MountainCell;
@@ -22,6 +23,7 @@ import ru.mephi.lab.cell.PlainCell;
 import ru.mephi.lab.cell.WaterCell;
 import ru.mephi.lab.level.GameConstructions;
 import ru.mephi.lab.level.GameField;
+import ru.mephi.lab.level.GameParams;
 import ru.mephi.lab.level.GameSession;
 import ru.mephi.lab.screens.AfterGameMenuScreen;
 import ru.mephi.lab.screens.GameScreen;
@@ -58,8 +60,8 @@ public class MyGdxGame extends Game {
         GameConstructions gameConstructions = new GameConstructions();
 
         int[][] matrix = {
-                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                {2, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                {1, 2, 1, 1, 1, 1, 1, 1, 2, 1},
                 {1, 1, 1, 1, 1, 1, 1, 1, 2, 1},
                 {1, 1, 1, 1, 1, 3, 1, 2, 2, 1},
                 {1, 1, 1, 2, 3, 3, 3, 3, 2, 1},
@@ -89,6 +91,8 @@ public class MyGdxGame extends Game {
             }
         }
 
+        // lairs
+
         Cell cell = gameField.field.getCell(0, 1);
         Cell cell1 = gameField.field.getCell(1, 0);
 
@@ -98,7 +102,7 @@ public class MyGdxGame extends Game {
         float fy2 = cell1.getY();
 
         EnemyArray enemyArray = new EnemyArray(2, new ArrayList<>(Arrays.asList(new LightInfantry(fx, fy))));
-        EnemyArray enemyArray2 = new EnemyArray(20, new ArrayList<>(Arrays.asList(new LightInfantry(fx, fy))));
+        EnemyArray enemyArray2 = new EnemyArray(20, new ArrayList<>(Arrays.asList(new HeavyInfantry(fx, fy))));
         EnemyArray enemyArray3 = new EnemyArray(7, new ArrayList<>(Arrays.asList(new Aviation(fx2, fy2))));
 
         Lair lair = new Lair(fx, fy);
@@ -115,6 +119,8 @@ public class MyGdxGame extends Game {
         gameConstructions.addLair(lair);
         gameConstructions.addLair(lair2);
 
+        // castle
+
         cell = gameField.field.getCell(9, 9);
 
         fx = cell.getX();
@@ -123,6 +129,8 @@ public class MyGdxGame extends Game {
         Castle castle = new Castle(0, fx, fy);
         cell.addActor(castle);
         gameConstructions.setCastle(castle);
+
+        // fence
 
         cell = gameField.field.getCell(4, 9);
 
@@ -133,8 +141,31 @@ public class MyGdxGame extends Game {
         cell.addActor(fence);
         gameConstructions.addFence(fence);
 
-        JsonProcessor.serializeObjectAndWrite("assets/systemFiles/gameSaves/gameAFG2Bae323vr/field.json", gameField);
-        JsonProcessor.serializeObjectAndWrite("assets/systemFiles/gameSaves/gameAFG2Bae323vr/constructions.json", gameConstructions);
+        cell = gameField.field.getCell(5, 9);
+
+        fx = cell.getX();
+        fy = cell.getY();
+
+        fence = new Fence(fx, fy);
+        cell.addActor(fence);
+        gameConstructions.addFence(fence);
+
+        cell = gameField.field.getCell(3, 9);
+
+        fx = cell.getX();
+        fy = cell.getY();
+
+        fence = new Fence(fx, fy);
+        cell.addActor(fence);
+        gameConstructions.addFence(fence);
+
+        GameParams gameParams = new GameParams(100);
+
+        // saving
+
+        JsonProcessor.serializeObjectAndWrite("assets/systemFiles/gameSaves/gameAFG2Brrr23vr/field.json", gameField);
+        JsonProcessor.serializeObjectAndWrite("assets/systemFiles/gameSaves/gameAFG2Brrr23vr/params.json", gameParams);
+        JsonProcessor.serializeObjectAndWrite("assets/systemFiles/gameSaves/gameAFG2Brrr23vr/constructions.json", gameConstructions);
 
         camera = new OrthographicCamera(SCREEN_WIDTH, SCREEN_HEIGHT);
         viewport = new ExtendViewport(SCREEN_WIDTH, SCREEN_HEIGHT, camera);

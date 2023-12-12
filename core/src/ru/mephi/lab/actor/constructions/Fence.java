@@ -18,7 +18,7 @@ public class Fence extends BaseActor implements Hittable {
         texturePath = TILES_PATH + "fence/fence.png";
         loadTexture();
 
-        healthPoints = 1;
+        healthPoints = FENCE_DEFAULT_HEALTH_POINTS;
         drawingType = DrawingType.ONE_TEXTURE;
         actorType = ActorType.FENCE;
 

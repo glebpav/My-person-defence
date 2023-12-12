@@ -21,6 +21,17 @@ public class GameSettings {
     public static int CHARACTER_HEIGHT = 64;
 
 
+    // Health points
+
+    public static float FENCE_DEFAULT_HEALTH_POINTS = 5;
+
+
+    // Fence damage
+
+    public static float HEAVY_INFANTRY_FENCE_DAMAGE = 10;
+    public static float AVIATION_FENCE_DAMAGE = 10;
+
+
     public static final String SKINS_PATH = "gameResources/skins/";
     public static final String TILES_PATH = "gameResources/tiles/";
 

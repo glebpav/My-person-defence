@@ -1,45 +1,45 @@
 package ru.mephi.lab.actor.enemy;
 
+import ru.mephi.lab.actor.ActorType;
 import ru.mephi.lab.actor.enemy.Enemy;
 import ru.mephi.lab.utils.way.WayProcessor;
 
 import java.util.*;
 
-/**
- * 
- */
+import static ru.mephi.lab.GameSettings.*;
+
 public class HeavyInfantry extends Enemy {
 
-    /**
-     * Default constructor
-     */
     public HeavyInfantry(float x, float y) {
         super(x, y);
-    }
-    /**
-     * 
-     */
-    private int fenceAtackRadius;
+        setWidth(CHARACTER_WIDTH);
+        setHeight(CHARACTER_HEIGHT);
 
-    /**
-     * @return
-     */
+        texturePath = TILES_PATH + "enemies/heavyInfantry.png";
+
+        damageRatio = 0.5f;
+        healthPoints = 80;
+        fenceAttackRadius = 2;
+        actorType = ActorType.ENEMY;
+        enemyType = EnemyType.HEAVY_INFANTRY;
+    }
+
+    public HeavyInfantry(float x, float y, float healthPoints, int fenceAttackRadius) {
+        this(x, y);
+        this.healthPoints = healthPoints;
+        this.fenceAttackRadius = fenceAttackRadius;
+    }
+
     public float makeDamage() {
         // TODO implement here
         return 0;
     }
 
-    /**
-     * @return
-     */
     @Override
     public void makeStep(WayProcessor wayProcessor) {
         // TODO implement here
     }
 
-    /**
-     * @return
-     */
     public void regenerateHipPoints() {
         // TODO implement here
     }

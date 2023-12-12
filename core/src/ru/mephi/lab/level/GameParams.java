@@ -13,6 +13,11 @@ public class GameParams {
     @SerializedName("currentBank")
     private int currentBank;
 
+    public GameParams(int currentBank) {
+        currentTick = 0;
+        this.currentBank = currentBank;
+    }
+
     public int getCurrentTick() {
         return currentTick / TICK_DURATION;
     }

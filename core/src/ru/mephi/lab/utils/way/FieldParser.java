@@ -96,19 +96,24 @@ public class FieldParser {
     }
 
     public static int getWeight(CellType typeFrom, CellType typeTo, EnemyType enemyType) {
-        switch (enemyType) {
+        return switch (enemyType) {
             case LIGHT_INFANTRY -> {
-                if (typeTo == CellType.PLANE || typeTo == CellType.CASTLE) return 1;
-                return 0;
+                if (typeTo == CellType.PLANE || typeTo == CellType.CASTLE) yield  1;
+                yield 0;
             }
             case AVIATION -> {
-                if (typeTo != CellType.MOUNTAIN && typeFrom != CellType.MOUNTAIN) return 1;
-                return 0;
+                if (typeTo != CellType.MOUNTAIN && typeFrom != CellType.MOUNTAIN) yield 1;
+                yield 0;
             }
-            default -> {
-                return 1;
+            case HEAVY_INFANTRY ->  {
+                if (typeTo == CellType.PLANE || typeTo == CellType.CASTLE) yield 1;
+                if (typeTo == CellType.FENCE) {
+                    // System.out.println("fence in get wight");
+                    yield 2;
+                }
+                yield 0;
             }
-        }
+        };
     }
 
 }

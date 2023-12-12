@@ -91,7 +91,6 @@ public class GameSession {
                         BaseActor actor = cell.actorsList.get(i);
                         if (actor.actorType == ActorType.ENEMY) {
 
-                            ((Enemy) actor).makeStep(wayProcessor);
                             boolean didAttack = false;
                             hasAnyEnemyFound = true;
 
@@ -112,7 +111,15 @@ public class GameSession {
                                     }
                                 }
                                 case HEAVY_INFANTRY -> {
-
+                                    BaseActor fence = actor.shouldAttackFence(field);
+                                    if (fence != null) {
+                                        double damageFence = actor.makeDamageFence();
+                                        if (fence.getDamage(damageFence)) {
+                                            deletedActors.add(fence);
+                                            fence.fieldPosition.setPosition(actor.fieldPosition.x, actor.fieldPosition.y);
+                                            deleteFencePosition = fence.fieldPosition;
+                                        }
+                                    }
                                 }
                             }
 
@@ -120,6 +127,8 @@ public class GameSession {
                                 deletedActors.add(cell.actorsList.get(i));
                                 cell.actorsList.remove(i);
                                 i -= 1;
+                            } else {
+                                ((Enemy) actor).makeStep(wayProcessor);
                             }
                         }
                     }
@@ -127,14 +136,9 @@ public class GameSession {
                     boolean wasFieldModified = deleteFencePosition != null;
 
                     if (wasFieldModified) {
-                        System.out.println("Len before: " + cell.actorsList.size());
-                    }
-
-                    if (wasFieldModified) {
                         ArrayList<BaseActor> actors = field.getCeilActor((int) deleteFencePosition.x, (int) deleteFencePosition.y);
                         for (int i = 0; i < actors.size(); i++) {
                             if (actors.get(i).actorType == ActorType.FENCE) {
-                                System.out.println("deleting fence");
                                 actors.remove(i);
                                 i -= 1;
                             }
@@ -142,7 +146,6 @@ public class GameSession {
                     }
 
                     if (wasFieldModified) {
-                        System.out.println("Len after: " + cell.actorsList.size());
                         wayProcessor.updateConnectionsMatrix(this);
                     }
                 }
@@ -164,7 +167,7 @@ public class GameSession {
                         enemy.loadTexture();
                         addActors.add(enemy);
                         field.setCeilActor((int) lair.fieldPosition.x, (int) lair.fieldPosition.y, enemy);
-                        enemy.fieldPosition.setPosition(lair.fieldPosition.x, lair.fieldPosition.y);
+                        enemy.fieldPosition.setPosition(lair.fieldPosition.y, lair.fieldPosition.x);
                     });
                 }
 
@@ -177,7 +180,6 @@ public class GameSession {
             if (!hasAnyEnemyFound) {
                 state = GameState.ENDED;
             }
-
         }
 
         lastGameTick = params.getCurrentTick();

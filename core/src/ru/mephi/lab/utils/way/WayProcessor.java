@@ -46,7 +46,7 @@ public class WayProcessor {
     }
 
     @SuppressWarnings("NewApi")
-    public Position getNextPosition(int thisX, int thisY, EnemyType enemyType) {
+    public ArrayList<Position> getNextPosition(int thisX, int thisY, EnemyType enemyType) {
         /*Arrays.stream(lightInfantryConnectionMatrix).forEach(ints -> {
             System.out.println(Arrays.toString(ints));
         });*/
@@ -62,15 +62,16 @@ public class WayProcessor {
                 (int) (castlePosition.x + castlePosition.y * fieldWidth)
         );
 
-        // System.out.println("shortest path: " + shortestPath);
-
         if (shortestPath == null || shortestPath.isEmpty()) return null;
 
-        return new Position(shortestPath.get(0) % fieldWidth, (float) (shortestPath.get(0) / fieldWidth));
+        ArrayList<Position> pathInPositions = new ArrayList<>();
+        // System.out.println(shortestPath);
+        shortestPath.forEach(integer -> pathInPositions.add(new Position(integer % fieldWidth, ((int) integer / fieldWidth))));
+
+        return pathInPositions;
     }
 
     public void updateConnectionsMatrix(GameSession gameSession) {
-        System.out.println("Update connection matrix");
         lightInfantryConnectionMatrix = FieldParser.parseField(gameSession, EnemyType.LIGHT_INFANTRY);
         heavyInfantryConnectionMatrix = FieldParser.parseField(gameSession, EnemyType.HEAVY_INFANTRY);
         aviationConnectionMatrix = FieldParser.parseField(gameSession, EnemyType.AVIATION);
