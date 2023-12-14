@@ -46,7 +46,7 @@ public class AfterGameMenuScreen extends BaseScreen {
     public void initLoosedActorsGroup() {
         Table rootTable = new Table();
         Label label = new Label("Whoops, you loosed", myGdxGame.skin);
-        Button startButton = new TextButton("go to menu", myGdxGame.skin);
+        Button startButton = new TextButton("Go to menu", myGdxGame.skin);
 
         label.setFontScale(2);
 
@@ -69,7 +69,7 @@ public class AfterGameMenuScreen extends BaseScreen {
     public void initWonActorsGroup() {
         Table rootTable = new Table();
         Label label = new Label("Wu-aha, you won, congratulations", myGdxGame.skin);
-        Button startButton = new TextButton("go to menu", myGdxGame.skin);
+        Button startButton = new TextButton("Go to menu", myGdxGame.skin);
 
         label.setFontScale(2);
 

@@ -39,7 +39,6 @@ public class BaseScreen extends ScreenAdapter {
     public void render(float delta) {
         ScreenUtils.clear(Color.GRAY);
         stage.act(delta);
-        Group group = new Group();
         stage.draw();
     }
 }

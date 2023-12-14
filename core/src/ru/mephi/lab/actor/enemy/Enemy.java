@@ -55,8 +55,7 @@ public class Enemy extends BaseActor implements Hittable {
     @Override
     public boolean shouldAttack(int castleX, int castleY) {
         return switch (enemyType) {
-            case HEAVY_INFANTRY -> false;
-            case LIGHT_INFANTRY, AVIATION -> castleX == fieldPosition.x && castleY == fieldPosition.y;
+            case LIGHT_INFANTRY, AVIATION, HEAVY_INFANTRY -> castleX == fieldPosition.x && castleY == fieldPosition.y;
         };
     }
 

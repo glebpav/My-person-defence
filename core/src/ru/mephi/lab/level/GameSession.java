@@ -1,6 +1,7 @@
 package ru.mephi.lab.level;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.sun.jdi.event.ThreadStartEvent;
 import ru.mephi.lab.actor.ActorType;
 import ru.mephi.lab.actor.BaseActor;
 import ru.mephi.lab.actor.Position;
@@ -9,6 +10,7 @@ import ru.mephi.lab.actor.enemy.Enemy;
 import ru.mephi.lab.actor.enemy.EnemyType;
 import ru.mephi.lab.actor.enemy.LightInfantry;
 import ru.mephi.lab.cell.Cell;
+import ru.mephi.lab.threads.TreadStepExecutor;
 import ru.mephi.lab.utils.files.JsonProcessor;
 import ru.mephi.lab.utils.geometry.GeometryHelper;
 import ru.mephi.lab.utils.idHelper.GameIdProcessor;
@@ -27,7 +29,7 @@ public class GameSession {
     private int lastGameTick;
     public GameConstructions constructions;
 
-    WayProcessor wayProcessor;
+    public WayProcessor wayProcessor;
 
     private final String gameId;
     private final String gamePath;
@@ -75,81 +77,14 @@ public class GameSession {
 
         if (lastGameTick != params.getCurrentTick()) {
 
-            boolean hasAnyEnemyFound = false;
+            TreadStepExecutor treadStepExecutor = new TreadStepExecutor(this);
+            treadStepExecutor.start(4);
 
+            ArrayList<Actor> deletedActors = treadStepExecutor.removedActors;
             ArrayList<Actor> addActors = new ArrayList<>();
-            ArrayList<Actor> deletedActors = new ArrayList<>();
 
-            Cell cell;
-            double sumDamage = 0;
-
-            for (int x = 0; x < field.fieldHeight; x++) {
-                for (int y = 0; y < field.fieldWidth; y++) {
-                    cell = field.field.getCell(x, y);
-                    Position deleteFencePosition = null;
-                    for (int i = 0; i < cell.actorsList.size(); i++) {
-                        BaseActor actor = cell.actorsList.get(i);
-                        if (actor.actorType == ActorType.ENEMY) {
-
-                            boolean didAttack = false;
-                            hasAnyEnemyFound = true;
-
-                            switch (((Enemy) actor).enemyType) {
-                                case LIGHT_INFANTRY, AVIATION -> {
-                                    if (actor.shouldAttack((int) wayProcessor.castlePosition.x, (int) wayProcessor.castlePosition.y)) {
-                                        sumDamage += actor.makeDamage();
-                                        didAttack = true;
-                                    }
-                                    BaseActor fence = actor.shouldAttackFence(field);
-                                    if (fence != null) {
-                                        double damageFence = actor.makeDamageFence();
-                                        if (fence.getDamage(damageFence)) {
-                                            deletedActors.add(fence);
-                                            fence.fieldPosition.setPosition(actor.fieldPosition.x, actor.fieldPosition.y);
-                                            deleteFencePosition = fence.fieldPosition;
-                                        }
-                                    }
-                                }
-                                case HEAVY_INFANTRY -> {
-                                    BaseActor fence = actor.shouldAttackFence(field);
-                                    if (fence != null) {
-                                        double damageFence = actor.makeDamageFence();
-                                        if (fence.getDamage(damageFence)) {
-                                            deletedActors.add(fence);
-                                            fence.fieldPosition.setPosition(actor.fieldPosition.x, actor.fieldPosition.y);
-                                            deleteFencePosition = fence.fieldPosition;
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (didAttack) {
-                                deletedActors.add(cell.actorsList.get(i));
-                                cell.actorsList.remove(i);
-                                i -= 1;
-                            } else {
-                                ((Enemy) actor).makeStep(wayProcessor);
-                            }
-                        }
-                    }
-
-                    boolean wasFieldModified = deleteFencePosition != null;
-
-                    if (wasFieldModified) {
-                        ArrayList<BaseActor> actors = field.getCeilActor((int) deleteFencePosition.x, (int) deleteFencePosition.y);
-                        for (int i = 0; i < actors.size(); i++) {
-                            if (actors.get(i).actorType == ActorType.FENCE) {
-                                actors.remove(i);
-                                i -= 1;
-                            }
-                        }
-                    }
-
-                    if (wasFieldModified) {
-                        wayProcessor.updateConnectionsMatrix(this);
-                    }
-                }
-            }
+            int sumDamage = (int) treadStepExecutor.sumCastleDamage;
+            boolean hasAnyEnemyFound = treadStepExecutor.hasAnyEnemyFound;
 
             if (constructions.castle.getDamage(sumDamage)) {
                 state = GameState.LOOSED;
