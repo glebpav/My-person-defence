@@ -25,11 +25,22 @@ public class GameSettings {
 
     public static float FENCE_DEFAULT_HEALTH_POINTS = 5;
 
-
-    // Fence damage
+    // Fence damage by enemies
 
     public static float HEAVY_INFANTRY_FENCE_DAMAGE = 10;
     public static float AVIATION_FENCE_DAMAGE = 10;
+
+    // Default damage by Tower
+
+    public static float TOWER_DAMAGE_LEVEL_1 = 10;
+    public static float TOWER_DAMAGE_LEVEL_2 = 15;
+    public static float TOWER_DAMAGE_LEVEL_3 = 20;
+
+    // Attack radius by Tower
+
+    public static float TOWER_ATTACK_RADIUS_LEVEL_1 = 2;
+    public static float TOWER_ATTACK_RADIUS_LEVEL_2 = 3;
+    public static float TOWER_ATTACK_RADIUS_LEVEL_3 = 4;
 
 
     public static final String SKINS_PATH = "gameResources/skins/";

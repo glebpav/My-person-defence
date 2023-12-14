@@ -96,7 +96,6 @@ public class GameSession {
 
                 if (newEnemies != null) {
                     newEnemies.forEach(enemy -> {
-                        // lair.addActor(enemy);
                         enemy.setX(lair.getX());
                         enemy.setY(lair.getY());
                         enemy.loadTexture();

@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.mephi.lab.actor.abilities.Damageable;
 import ru.mephi.lab.actor.abilities.Hittable;
 import ru.mephi.lab.actor.abilities.Indescribable;
+import ru.mephi.lab.actor.abilities.Updatable;
 import ru.mephi.lab.level.GameField;
 
 import java.util.ArrayList;
@@ -14,10 +15,6 @@ import java.util.ArrayList;
 public class BaseActor extends Actor implements Damageable, Hittable {
 
     protected DrawingType drawingType;
-
-    public ActorType actorType;
-
-    public double healthPoints;
     protected transient Texture texture;
     protected transient ArrayList<Texture> texturesArray;
 
@@ -25,6 +22,10 @@ public class BaseActor extends Actor implements Damageable, Hittable {
     protected String texturePath;
     protected ArrayList<String> texturePathArray;
     protected int[][] spriteCoords;
+
+    public ActorType actorType;
+
+    public double healthPoints;
 
     public BaseActor(float x, float y) {
         setX(x);
@@ -105,4 +106,5 @@ public class BaseActor extends Actor implements Damageable, Hittable {
     public boolean isAlive() {
         return healthPoints > 0;
     }
+
 }

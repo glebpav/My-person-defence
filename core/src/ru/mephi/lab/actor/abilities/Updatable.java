@@ -7,9 +7,8 @@ import java.util.*;
  */
 public interface Updatable {
 
-    /**
-     * 
-     */
     public void updateLevel();
+
+    public boolean hasNextLevel();
 
 }

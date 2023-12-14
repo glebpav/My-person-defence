@@ -10,9 +10,7 @@ import java.util.ArrayList;
 
 import static ru.mephi.lab.GameSettings.*;
 
-/**
- * 
- */
+
 public class Castle extends BaseActor implements Hittable, Updatable {
 
     public static int Y_OFFSET = 10;
@@ -64,5 +62,10 @@ public class Castle extends BaseActor implements Hittable, Updatable {
     @Override
     public void updateLevel() {
 
+    }
+
+    @Override
+    public boolean hasNextLevel() {
+        return false;
     }
 }
