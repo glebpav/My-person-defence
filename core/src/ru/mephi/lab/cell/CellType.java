@@ -5,7 +5,7 @@ public enum CellType {
     MOUNTAIN(1),
     WATER(1),
     PLANE(1),
-    IMPASSABLE_CONSTRUCTION(1),
+    IMPASSABLE_CONSTRUCTION(0),
     FENCE(0),
     CASTLE(0),
     DEFAULT(3);

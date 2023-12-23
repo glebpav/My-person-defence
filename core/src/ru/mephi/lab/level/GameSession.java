@@ -6,6 +6,7 @@ import ru.mephi.lab.actor.ActorType;
 import ru.mephi.lab.actor.BaseActor;
 import ru.mephi.lab.actor.Position;
 import ru.mephi.lab.actor.constructions.Lair;
+import ru.mephi.lab.actor.constructions.Tower;
 import ru.mephi.lab.actor.enemy.Enemy;
 import ru.mephi.lab.actor.enemy.EnemyType;
 import ru.mephi.lab.actor.enemy.LightInfantry;
@@ -106,6 +107,10 @@ public class GameSession {
                 }
 
                 lair.removeOutEnemies(params.getCurrentTick());
+            }
+
+            for (Tower tower : constructions.towersArray) {
+
             }
 
             if (!deletedActors.isEmpty()) onFieldChanged.onRemoveActors(deletedActors);

@@ -13,6 +13,7 @@ import ru.mephi.lab.actor.Position;
 import ru.mephi.lab.actor.constructions.Castle;
 import ru.mephi.lab.actor.constructions.Fence;
 import ru.mephi.lab.actor.constructions.Lair;
+import ru.mephi.lab.actor.constructions.Tower;
 import ru.mephi.lab.actor.enemy.Aviation;
 import ru.mephi.lab.actor.enemy.Enemy;
 import ru.mephi.lab.actor.enemy.HeavyInfantry;
@@ -158,6 +159,15 @@ public class MyGdxGame extends Game {
         fence = new Fence(fx, fy);
         cell.addActor(fence);
         gameConstructions.addFence(fence);
+
+        cell = gameField.field.getCell(8, 9);
+
+        fx = cell.getX();
+        fy = cell.getY();
+
+        Tower tower = new Tower(fx, fy);
+        cell.addActor(tower);
+        gameConstructions.addTower(tower);
 
         GameParams gameParams = new GameParams(100);
 

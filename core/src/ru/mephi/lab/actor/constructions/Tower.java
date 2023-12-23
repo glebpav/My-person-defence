@@ -27,13 +27,13 @@ public class Tower extends BaseActor implements Updatable{
 
         setWidth(CONSTRUCTION_WIDTH);
         setHeight(CONSTRUCTION_HEIGHT);
-        texturePath = TILES_PATH + "castle/castle_level1.png";
-        loadTexture();
 
         drawingType = DrawingType.ONE_TEXTURE;
         actorType = ActorType.TOWER;
 
-        level = 1;
+        texturePath = TILES_PATH + "tower/" + TowerLevelDescriptor.getLevelDescriptor(level).texturePath;
+        System.out.println(texturePath);
+        loadTexture();
 
         damage = (int) TowerLevelDescriptor.getLevelDescriptor(level).damage;
         attackRadius = (int) TowerLevelDescriptor.getLevelDescriptor(level).attackRadius;

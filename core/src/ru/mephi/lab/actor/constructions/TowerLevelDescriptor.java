@@ -4,9 +4,9 @@ import static ru.mephi.lab.GameSettings.*;
 
 public enum TowerLevelDescriptor {
 
-    LEVEL_1("castle_level_1.png", TOWER_DAMAGE_LEVEL_1, TOWER_ATTACK_RADIUS_LEVEL_1),
-    LEVEL_2("castle_level_2.png", TOWER_DAMAGE_LEVEL_2, TOWER_ATTACK_RADIUS_LEVEL_2),
-    LEVEL_3("castle_level_3.png", TOWER_DAMAGE_LEVEL_3, TOWER_ATTACK_RADIUS_LEVEL_3);
+    LEVEL_1("tower_level_1.png", TOWER_DAMAGE_LEVEL_1, TOWER_ATTACK_RADIUS_LEVEL_1),
+    LEVEL_2("tower_level_2.png", TOWER_DAMAGE_LEVEL_2, TOWER_ATTACK_RADIUS_LEVEL_2),
+    LEVEL_3("tower_level_3.png", TOWER_DAMAGE_LEVEL_3, TOWER_ATTACK_RADIUS_LEVEL_3);
 
     public final String texturePath;
     public final float damage;
