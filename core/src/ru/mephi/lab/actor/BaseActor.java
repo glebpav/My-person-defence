@@ -49,7 +49,13 @@ public class BaseActor extends Actor implements Damageable, Hittable {
             }
             case UPDATABLE_TEXTURE, ANIMATING_TEXTURE -> {
                 texturesArray = new ArrayList<>();
-                texturePathArray.forEach(path -> texturesArray.add(new Texture(path)));
+                texturePathArray.forEach(path -> {
+                    try {
+                        texturesArray.add(new Texture(path));
+                    } catch (Exception ignored) {
+
+                    }
+                });
             }
         }
     }

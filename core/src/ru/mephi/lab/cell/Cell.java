@@ -31,7 +31,11 @@ public class Cell extends Actor {
 
     public void loadTexture() {
         if (!texturePath.isEmpty()) {
-            texture = new Texture(texturePath);
+            try {
+                texture = new Texture(texturePath);
+            } catch (Exception ignored) {
+
+            }
         }
 
         setWidth(CELL_WIDTH);
