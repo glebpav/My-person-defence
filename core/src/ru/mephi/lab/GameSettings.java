@@ -2,11 +2,10 @@ package ru.mephi.lab;
 
 public class GameSettings {
 
-    public static final int TICK_DURATION = 10;
+    public static final int TICK_DURATION = 60;
 
     public static final int SCREEN_WIDTH = 1280;
     public static final int SCREEN_HEIGHT = 720;
-
 
     public static int CELL_WIDTH = 128;
     public static int CELL_HEIGHT = 128;
@@ -47,5 +46,6 @@ public class GameSettings {
     public static final String TILES_PATH = "gameResources/tiles/";
 
     public static final boolean DEBUG_MODE = true;
+    public static boolean TEST_MODE = false;
 
 }

@@ -10,7 +10,11 @@ public class MountainCell extends Cell{
     public MountainCell(int x, int y) {
         super(x, y);
         texturePath = TILES_PATH + "cells/lava.png";
-        texture = new Texture(texturePath);
+        try{
+            texture = new Texture(texturePath);
+        } catch (Exception ignored) {
+
+        }
         cellType = CellType.MOUNTAIN;
     }
 

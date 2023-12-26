@@ -41,7 +41,11 @@ public class BaseActor extends Actor implements Damageable, Hittable {
     public void loadTexture() {
         switch (drawingType) {
             case ONE_TEXTURE -> {
-                texture = new Texture(texturePath);
+                try {
+                    texture = new Texture(texturePath);
+                } catch (Exception ignored) {
+
+                }
             }
             case UPDATABLE_TEXTURE, ANIMATING_TEXTURE -> {
                 texturesArray = new ArrayList<>();

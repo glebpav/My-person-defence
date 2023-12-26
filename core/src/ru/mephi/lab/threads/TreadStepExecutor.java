@@ -2,6 +2,7 @@ package ru.mephi.lab.threads;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.mephi.lab.actor.BaseActor;
+import ru.mephi.lab.actor.enemy.Enemy;
 import ru.mephi.lab.level.GameSession;
 
 import java.util.ArrayList;
@@ -12,12 +13,14 @@ public class TreadStepExecutor {
     public boolean hasAnyEnemyFound;
     public double sumCastleDamage;
     public ArrayList<Actor> removedActors;
+    public ArrayList<Enemy> availableEnemies;
 
     public TreadStepExecutor(GameSession gameSession) {
         this.gameSession = gameSession;
         this.hasAnyEnemyFound = false;
         this.sumCastleDamage = 0;
         this.removedActors = new ArrayList<>();
+        this.availableEnemies = new ArrayList<>();
     }
 
     @SuppressWarnings("NewApi")
@@ -42,6 +45,7 @@ public class TreadStepExecutor {
                 sumCastleDamage += stepThread.sumCastleDamage;
                 hasAnyEnemyFound = hasAnyEnemyFound || stepThread.hasAnyEnemyFound;
                 removedActors.addAll(stepThread.removedActors);
+                availableEnemies.addAll(stepThread.availableEnemies);
             });
 
             return true;

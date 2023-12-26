@@ -10,7 +10,11 @@ public class PlainCell extends Cell{
     public PlainCell(int x, int y) {
         super(x, y);
         texturePath = TILES_PATH + "cells/plane.png";
-        texture = new Texture(texturePath);
+        try{
+            texture = new Texture(texturePath);
+        } catch (Exception ignored) {
+
+        }
         cellType = CellType.PLANE;
     }
 

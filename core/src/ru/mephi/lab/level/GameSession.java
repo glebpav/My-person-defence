@@ -110,7 +110,11 @@ public class GameSession {
             }
 
             for (Tower tower : constructions.towersArray) {
-
+                for (Enemy enemy : treadStepExecutor.availableEnemies) {
+                    tower.inInAttackRadius((int) enemy.fieldPosition.x, (int) enemy.fieldPosition.y);
+                    float damage = tower.makeDamage();
+                    // enemy.get
+                }
             }
 
             if (!deletedActors.isEmpty()) onFieldChanged.onRemoveActors(deletedActors);

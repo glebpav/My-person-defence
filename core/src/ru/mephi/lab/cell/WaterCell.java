@@ -10,7 +10,11 @@ public class WaterCell extends Cell{
     public WaterCell(int x, int y) {
         super(x, y);
         texturePath = TILES_PATH + "cells/water.png";
-        texture = new Texture(texturePath);
+        try{
+            texture = new Texture(texturePath);
+        } catch (Exception ignored) {
+
+        }
         cellType = CellType.WATER;
     }
 

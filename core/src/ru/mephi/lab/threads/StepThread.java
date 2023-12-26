@@ -15,6 +15,7 @@ public class StepThread extends Thread {
     boolean hasAnyEnemyFound;
     double sumCastleDamage;
     ArrayList<BaseActor> removedActors;
+    ArrayList<Enemy> availableEnemies;
 
     int countOfThreads;
     int threadIdx;
@@ -25,6 +26,7 @@ public class StepThread extends Thread {
         sumCastleDamage = 0;
 
         removedActors = new ArrayList<>();
+        availableEnemies = new ArrayList<>();
 
         this.countOfThreads = countOfThreads;
         this.threadIdx = threadIdx;
@@ -74,6 +76,7 @@ public class StepThread extends Thread {
                             cell.actorsList.remove(i);
                             i -= 1;
                         } else {
+                            availableEnemies.add((Enemy) actor);
                             ((Enemy) actor).makeStep(gameSession.wayProcessor);
                         }
 
