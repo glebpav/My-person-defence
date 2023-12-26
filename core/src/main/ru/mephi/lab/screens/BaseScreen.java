@@ -22,7 +22,7 @@ public class BaseScreen extends ScreenAdapter {
 
     public BaseScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-        stage = new Stage(myGdxGame.viewport);
+        if (myGdxGame.viewport != null)  stage = new Stage(myGdxGame.viewport);
     }
 
     @Override
