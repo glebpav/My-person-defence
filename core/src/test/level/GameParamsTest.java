@@ -1,4 +1,4 @@
-package test1.level;
+package level;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

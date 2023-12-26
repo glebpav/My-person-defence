@@ -1,4 +1,4 @@
-package test1.utils.geometry;
+package utils.geometry;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

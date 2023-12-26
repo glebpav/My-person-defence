@@ -1,4 +1,4 @@
-package test1.utils.vector;
+package utils.vector;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;

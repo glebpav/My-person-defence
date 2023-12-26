@@ -1,4 +1,4 @@
-package test1.utils.files;
+package utils.files;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

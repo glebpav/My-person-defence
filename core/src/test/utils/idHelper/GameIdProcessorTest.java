@@ -1,4 +1,4 @@
-package test1.utils.idHelper;
+package utils.idHelper;
 
 import com.badlogic.gdx.Game;
 import org.junit.jupiter.api.Assertions;

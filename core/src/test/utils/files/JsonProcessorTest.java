@@ -1,4 +1,4 @@
-package test1.utils.files;
+package utils.files;
 
 import com.badlogic.gdx.utils.Json;
 import org.junit.jupiter.api.Assertions;

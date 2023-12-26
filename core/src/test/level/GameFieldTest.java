@@ -1,4 +1,4 @@
-package test1.level;
+package level;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import org.junit.jupiter.api.Assertions;

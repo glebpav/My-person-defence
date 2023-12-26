@@ -1,4 +1,4 @@
-package test1.utils.way;
+package utils.way;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
