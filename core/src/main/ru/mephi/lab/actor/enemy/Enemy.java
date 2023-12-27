@@ -82,11 +82,23 @@ public class Enemy extends BaseActor implements Hittable {
         setY(position.y);
     }
 
+    /**
+     * Method that return damage that this actor can make to another alive actor
+     *
+     * @return base damage
+     */
     @Override
     public float makeDamage() {
         return (float) (healthPoints * damageRatio);
     }
 
+    /**
+     * Method witch show if actor should attack castle on this step
+     *
+     * @param castleX - x position of castle
+     * @param castleY - y position of castle
+     * @return shouldAttack
+     */
     @Override
     public boolean shouldAttack(int castleX, int castleY) {
         return switch (enemyType) {
@@ -94,21 +106,41 @@ public class Enemy extends BaseActor implements Hittable {
         };
     }
 
+    /**
+     * Base method that increase health points of actor
+     */
     @Override
     public void regenerateHitPoints() {
 
     }
 
+    /**
+     * Base method witch is invoking when actor gets damage
+     *
+     * @param damage - count of damage witch actor gets
+     * @return is actor is still alive
+     */
     @Override
     public boolean getDamage(double damage) {
         return false;
     }
 
+    /**
+     * Base method that show if actor is still alive
+     *
+     * @return if actor alive
+     */
     @Override
     public boolean isAlive() {
         return false;
     }
 
+    /**
+     * Method witch show if actor should attack fence on this step
+     *
+     * @param gameField - object that contains field
+     * @return found fence instance
+     */
     @Override
     public BaseActor shouldAttackFence(GameField gameField) {
         return switch (enemyType) {
@@ -161,6 +193,11 @@ public class Enemy extends BaseActor implements Hittable {
         };
     }
 
+    /**
+     * Base method that return damage that this actor can make to fence
+     *
+     * @return base fence damage
+     */
     @Override
     public float makeDamageFence() {
         if (enemyType == EnemyType.AVIATION && leftAmmunitionCount > 0){

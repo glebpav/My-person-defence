@@ -130,8 +130,7 @@ public class BaseActor extends Actor implements Damageable, Hittable {
     }
 
     /**
-     * base method that return damage that this actor can make to another alive actor
-     *
+     * Base method that return damage that this actor can make to another alive actor
      * @return base damage
      */
     @Override
