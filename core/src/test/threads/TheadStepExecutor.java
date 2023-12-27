@@ -1,5 +1,6 @@
 package threads;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.mephi.lab.actor.Position;
@@ -154,6 +155,8 @@ public class TheadStepExecutor {
     void start() {
         TreadStepExecutor treadStepExecutor = new TreadStepExecutor(gameSession);
         treadStepExecutor.start(4);
+
+        Assertions.assertEquals(treadStepExecutor.sumCastleDamage, 0);
     }
 
 }

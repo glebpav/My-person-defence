@@ -12,27 +12,62 @@ import ru.mephi.lab.utils.way.WayProcessor;
 
 import java.util.*;
 
+/**
+ * Class that declare special type of actor that can make damage to constructions
+ */
 public class Enemy extends BaseActor implements Hittable {
 
+    /**
+     * Array of buffs that applied at this moment
+     */
     public ArrayList<HeroBuff> buffsArray;
+
+    /**
+     * field that shows type of this enemy
+     */
     public EnemyType enemyType;
 
+    /**
+     * field that shows count of left ammunition -> count of available attack on fence
+     */
     protected int leftAmmunitionCount;
+    /**
+     *  field that shows in witch radius enemy can attack fence
+     */
     protected int fenceAttackRadius;
+    /**
+     * Field that shows on what ratio damage can be multiplied
+     */
     float damageRatio;
 
+    /**
+     * Array of future steps
+     */
     ArrayList<Position> nextSteps;
 
+    /**
+     * Base enemy constructor
+     * @param x - x position on the screen
+     * @param y - y position on the screen
+     */
     public Enemy(float x, float y) {
         super(x, y);
         actorType = ActorType.ENEMY;
         nextSteps = new ArrayList<>();
     }
 
+    /**
+     * Base method that applies buf from hero
+     * @param buff - applicable buff
+     */
     public void applyBuff(HeroBuff buff) {
-        // TODO implement here
+
     }
 
+    /**
+     * Method that move actor to another position by on step
+     * @param wayProcessor - object of helper class for finding shortest way
+     */
     public void makeStep(WayProcessor wayProcessor) {
 
         nextSteps = wayProcessor.getNextPosition((int) fieldPosition.x, (int) fieldPosition.y, enemyType);

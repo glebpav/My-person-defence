@@ -7,6 +7,7 @@ import ru.mephi.lab.utils.vector.BaseVector;
 
 import java.util.ArrayList;
 
+
 public class BaseVectorTest {
 
     static BaseVector<Integer> baseVector;

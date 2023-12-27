@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import ru.mephi.lab.GameSettings;
 
+/**
+ * Ui component that creates blackout on selected screen
+ */
 public class Blackout extends Actor {
 
     Texture blackoutTexture;

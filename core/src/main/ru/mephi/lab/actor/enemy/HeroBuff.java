@@ -8,29 +8,29 @@ import java.util.*;
 public class HeroBuff {
 
     /**
-     * Default constructor
-     */
-    public HeroBuff() {
-    }
-
-    /**
-     * 
+     *
      */
     public int extraHitPoints;
 
     /**
-     * 
+     *
      */
     public double extraProbabilityAvoidHit;
 
     /**
-     * 
+     *
      */
     public double extraRegenerationSpeed;
 
     /**
-     * 
+     *
      */
     public int extraSpeed;
+
+    /**
+     * Default constructor
+     */
+    public HeroBuff() {
+    }
 
 }

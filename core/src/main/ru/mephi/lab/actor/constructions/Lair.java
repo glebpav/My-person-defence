@@ -10,9 +10,6 @@ import java.util.*;
 
 import static ru.mephi.lab.GameSettings.*;
 
-/**
- *
- */
 public class Lair extends BaseActor {
 
     public final static int Y_OFFSET = 14;
